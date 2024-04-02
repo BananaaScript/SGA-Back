@@ -32,8 +32,8 @@ create table local(
     cep varchar(50)
 );
 
-create table ativo(
-	id int primary key,
+create table ativos(
+	id int primary key auto_increment,
     id_local int,
     nome varchar(50),
     numero_ativo varchar(50),
@@ -70,4 +70,4 @@ create table modelo(
     foreign key (id_categoria) references categoria(id)
 );
 
-select * from administrador
+select * from ativos
