@@ -52,17 +52,17 @@ create table manutencao(
     estado_ativo varchar(50),
     data_ultima_manutencao date,
     data_proxima_manutencao date,
-    foreign key (id_ativo) references ativo(id)
+    foreign key (id_ativo) references ativos(id)
 );
 
 create table categoria(
-	id int primary key,
+	id int primary key auto_increment,
     nome varchar(50),
     descricao varchar(255)
 );
 
 create table modelo(
-	id int primary key,
+	id int primary key auto_increment,
     id_categoria int,
     nome varchar(50),
     descricao varchar(255),
@@ -70,4 +70,6 @@ create table modelo(
     foreign key (id_categoria) references categoria(id)
 );
 
-select * from ativos
+select * from ativos;
+select * from categoria;
+select * from modelo;
