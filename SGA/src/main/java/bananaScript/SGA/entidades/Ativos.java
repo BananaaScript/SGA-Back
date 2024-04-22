@@ -13,6 +13,9 @@ public class Ativos{
 	private Long id;
 	
 	@Column
+	private Integer id_modelo;
+	
+	@Column
 	private String nome;
 	
 	@Column(unique = true)
@@ -98,6 +101,15 @@ public class Ativos{
 		this.cep = cep;
 	}
 
+	public Integer getId_modelo() {
+		return id_modelo;
+	}
+
+	public void setId_modelo(Integer id_modelo) {
+		this.id_modelo = id_modelo;
+	}
+
+	
 	
 	
 

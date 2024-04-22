@@ -47,6 +47,7 @@ public class AtivoControle {
 			ativo.setComplemento(novoAtivo.getComplemento());
 			ativo.setNumero(novoAtivo.getNumero());
 			ativo.setCep(novoAtivo.getCep());
+			ativo.setId_modelo(novoAtivo.getId_modelo());
 			repositorio.save(ativo);
 	}
 	
