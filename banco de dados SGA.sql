@@ -23,20 +23,6 @@ create table if not exists local(
     cep varchar(50)
 );
 
-create table if not exists ativos(
-	id int primary key auto_increment,
-    id_local int,
-    nome varchar(50),
-    numero_ativo varchar(50),
-    rua varchar(50),
-    bairro varchar(50),
-    complemento varchar(50),
-    numero varchar(50),
-    cep varchar(50),
-    unique key u_numativo(numero_ativo),
-    foreign key (id_local) references local(id)
-);
-
 create table if not exists notificacao(
 	id int primary key,
     usuario_id int,
@@ -44,15 +30,6 @@ create table if not exists notificacao(
     data_vencimento Date,
     data_cadastro Date,
     foreign key (usuario_id) references usuario(id)
-);
-
-create table if not exists manutencao(
-	id int primary key,
-    id_ativo int,
-    estado_ativo varchar(50),
-    data_ultima_manutencao date,
-    data_proxima_manutencao date,
-    foreign key (id_ativo) references ativos(id)
 );
 
 create table if not exists categoria(
@@ -68,6 +45,33 @@ create table  if not exists modelo(
     descricao varchar(255),
     modelo varchar(50),
     foreign key (id_categoria) references categoria(id)
+);
+
+create table if not exists ativos(
+	id int primary key auto_increment,
+    id_modelo int,
+    id_categoria int,
+    id_local int,
+    nome varchar(50),
+    numero_ativo varchar(50),
+    rua varchar(50),
+    bairro varchar(50),
+    complemento varchar(50),
+    numero varchar(50),
+    cep varchar(50),
+    unique key u_numativo(numero_ativo),
+    foreign key (id_modelo) references modelo(id),
+    foreign key (id_categoria) references categoria(id),
+    foreign key (id_local) references local(id)
+);
+
+create table if not exists manutencao(
+	id int primary key,
+    id_ativo int,
+    estado_ativo varchar(50),
+    data_ultima_manutencao date,
+    data_proxima_manutencao date,
+    foreign key (id_ativo) references ativos(id)
 );
 
 create table if not exists usuario(
