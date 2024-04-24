@@ -4,11 +4,12 @@ use SGAbd;
 create table if not exists usuario(
 	id int primary key,
     nome varchar(50),
+    senha varchar(50),
     cpf varchar(50),
     genero varchar(50),
     telefone varchar(50),
     email varchar(50),
-    role varchar(50),
+    role enum("ADMIN","USER"),
     unique key u_cpf(cpf)
 );
     
@@ -74,12 +75,7 @@ create table if not exists manutencao(
     foreign key (id_ativo) references ativos(id)
 );
 
-create table if not exists usuario(
-	id int primary key auto_increment,
-    nome varchar(50),
-    senha varchar(100)
-);
-
+select * from usuario;
 select * from ativos;
 select * from categoria;
 select * from modelo;
