@@ -20,7 +20,6 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Entity
@@ -42,7 +41,7 @@ public class Usuario implements UserDetails, Serializable  {
 	@Enumerated(EnumType.STRING)
 	private RoleUsuario role;
 	
-	public Usuario() {};
+	public Usuario() {}
 	
 	public Usuario(String nome, String senha, RoleUsuario role){
         this.nome = nome;

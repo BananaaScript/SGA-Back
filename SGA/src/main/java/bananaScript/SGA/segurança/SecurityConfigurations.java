@@ -20,7 +20,7 @@ public class SecurityConfigurations {
     @Autowired
     SecurityFilter securityFilter;
 
-    private final String[] rotasPublicas = {"/auth/login", "/auth/register","/**" };
+    private final String[] rotasPublicas = {"/auth/login", "/auth/register", "/**"};
     
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {

@@ -42,8 +42,7 @@ public class AuthenticationController {
     public ResponseEntity<Void> register(@RequestBody @Valid RegisterDTO data){
         if(this.repositorio.findByNome(data.nome()) != null) return ResponseEntity.badRequest().build();
 
-        String encryptedPassword = new BCryptPasswordEncoder().encode(data.senha());
-        Usuario newUser = new Usuario(data.nome(), encryptedPassword, data.role());
+        Usuario newUser = new Usuario(data.nome(), data.senha(), data.role());
 
         this.repositorio.save(newUser);
 
