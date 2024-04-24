@@ -2,6 +2,8 @@ package bananaScript.SGA.entidades;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,12 +15,12 @@ public class Notificacao {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long id;
+	private Long id;
 	@Column
-	public String usuario;
+	private String usuario;
 	@Column
-	public Date data_vencimento;
-	@Column Date data_cadastro;
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private Date dataExpiracao;
 	
 	public Long getId() {
 		return id;
@@ -32,17 +34,13 @@ public class Notificacao {
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
-	public Date getData_vencimento() {
-		return data_vencimento;
+	public Date getDataExpiracao() {
+		return dataExpiracao;
 	}
-	public void setData_vencimento(Date data_vencimento) {
-		this.data_vencimento = data_vencimento;
+	public void setDataExpiracao(Date dataExpiracao) {
+		this.dataExpiracao = dataExpiracao;
 	}
-	public Date getData_cadastro() {
-		return data_cadastro;
-	}
-	public void setData_cadastro(Date data_cadastro) {
-		this.data_cadastro = data_cadastro;
-	}
+	
+	
 	
 }

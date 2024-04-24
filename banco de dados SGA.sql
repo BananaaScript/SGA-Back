@@ -37,9 +37,8 @@ create table if not exists local(
 create table if not exists notificacao(
 	id int primary key,
     usuario_id int,
-    usuario_nome varchar(50),
-    data_vencimento Date,
-    data_cadastro Date,
+    usuario varchar(50),
+	data_expiracao date,
     foreign key (usuario_id) references usuario(id)
 );
 
@@ -65,6 +64,7 @@ create table if not exists ativos(
     id_local int,
     nome varchar(50),
     numero_ativo varchar(50),
+    data_manutencao date,
     rua varchar(50),
     bairro varchar(50),
     complemento varchar(50),

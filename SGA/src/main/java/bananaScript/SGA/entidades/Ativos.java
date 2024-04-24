@@ -1,5 +1,9 @@
 package bananaScript.SGA.entidades;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +26,10 @@ public class Ativos{
 	private Integer numero_ativo;
 	
 	@Column
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private Date dataManutencao;
+	
+	@Column
 	private String rua;
 	
 	@Column
@@ -35,7 +43,6 @@ public class Ativos{
 	
 	@Column
 	private String cep;
-	
 
 	public Long getId() {
 		return id;
@@ -43,6 +50,14 @@ public class Ativos{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Integer getId_modelo() {
+		return id_modelo;
+	}
+
+	public void setId_modelo(Integer id_modelo) {
+		this.id_modelo = id_modelo;
 	}
 
 	public String getNome() {
@@ -61,6 +76,14 @@ public class Ativos{
 		this.numero_ativo = numero_ativo;
 	}
 
+	public Date getDataManutencao() {
+		return dataManutencao;
+	}
+
+	public void setDataManutencao(Date dataManutencao) {
+		this.dataManutencao = dataManutencao;
+	}
+
 	public String getRua() {
 		return rua;
 	}
@@ -73,8 +96,8 @@ public class Ativos{
 		return bairro;
 	}
 
-	public void setBairro(String bairo) {
-		this.bairro = bairo;
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
 	}
 
 	public String getComplemento() {
@@ -100,17 +123,6 @@ public class Ativos{
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-
-	public Integer getId_modelo() {
-		return id_modelo;
-	}
-
-	public void setId_modelo(Integer id_modelo) {
-		this.id_modelo = id_modelo;
-	}
-
 	
 	
-	
-
 }

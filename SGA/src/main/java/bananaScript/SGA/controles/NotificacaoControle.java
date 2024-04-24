@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import bananaScript.SGA.entidades.Ativos;
 import bananaScript.SGA.entidades.Notificacao;
 import bananaScript.SGA.repositorios.NotificacaoRepositorio;
+import bananaScript.SGA.servicos.NotificationService;
 
 @RestController
 @RequestMapping("/notifica")
@@ -22,6 +24,9 @@ public class NotificacaoControle {
 	
 	@Autowired
 	private NotificacaoRepositorio repositorio;
+	
+	@Autowired
+	private NotificationService notificaService;
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PostMapping("/cadastrar")
@@ -40,8 +45,6 @@ public class NotificacaoControle {
 	public void atualizarNotificacao (@PathVariable Long id, @RequestBody Notificacao novaNoti) {
 		Notificacao notificacao = repositorio.findById(id).orElse(null);
 		if (notificacao != null) {
-			notificacao.setData_cadastro(novaNoti.getData_cadastro());
-			notificacao.setData_vencimento(novaNoti.getData_vencimento());
 			notificacao.setUsuario(novaNoti.getUsuario());
 		}
 	}
@@ -52,4 +55,10 @@ public class NotificacaoControle {
 		repositorio.deleteById(id);
 	}
 	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@GetMapping("/expirados")
+	public List<Ativos> verificarDatas(){
+		List<Ativos> ativosExpirados = notificaService.getAtivosExpirados();
+		return ativosExpirados;
+	}
 }
