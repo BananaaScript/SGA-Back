@@ -35,12 +35,13 @@ create table if not exists local(
 );
 
 create table if not exists notificacao(
-	id int primary key,
+	id int primary key auto_increment,
     usuario_id int,
     usuario varchar(50),
 	data_expiracao date,
     foreign key (usuario_id) references usuario(id)
 );
+
 
 create table if not exists categoria(
 	id int primary key auto_increment,
@@ -90,3 +91,4 @@ select * from usuario;
 select * from ativos;
 select * from categoria;
 select * from modelo;
+select * from notificacao;

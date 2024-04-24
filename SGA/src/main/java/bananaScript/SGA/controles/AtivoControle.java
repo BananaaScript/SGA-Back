@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import bananaScript.SGA.entidades.Ativos;
 import bananaScript.SGA.repositorios.AtivosRepositorio;
+import bananaScript.SGA.servicos.NotificationService;
 
 @RestController
 @RequestMapping("/ativo")
@@ -23,9 +24,13 @@ public class AtivoControle {
 	@Autowired
 	private AtivosRepositorio repositorio;
 	
+	@Autowired
+	private NotificationService notifica;
+	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PostMapping("/cadastrar")
     public void cadastrarAtivos(@RequestBody Ativos ativo) {
+		notifica.salvarNotificacao(ativo);
         repositorio.save(ativo);
     }
 	

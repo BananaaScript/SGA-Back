@@ -46,6 +46,7 @@ public class NotificacaoControle {
 		Notificacao notificacao = repositorio.findById(id).orElse(null);
 		if (notificacao != null) {
 			notificacao.setUsuario(novaNoti.getUsuario());
+			notificacao.setDataExpiracao(novaNoti.getDataExpiracao());
 		}
 	}
 	
