@@ -2,9 +2,9 @@ create database if not exists SGAbd;
 use SGAbd;
 
 create table if not exists usuario(
-	id int primary key,
+	id int primary key auto_increment,
     nome varchar(50),
-    senha varchar(50),
+    senha varchar(255),
     cpf varchar(50),
     genero varchar(50),
     telefone varchar(50),
@@ -12,7 +12,8 @@ create table if not exists usuario(
     role enum("ADMIN","USER"),
     unique key u_cpf(cpf)
 );
-    
+INSERT INTO usuario (nome, senha, cpf, genero, telefone, email, role) 
+VALUES ('nome', 'senha', 'cpf', 'genero', 'telefone', 'email', 'ADMIN'); 
 create table if not exists local(
 	id int primary key,
     estado varchar(50),
@@ -74,6 +75,7 @@ create table if not exists manutencao(
     data_proxima_manutencao date,
     foreign key (id_ativo) references ativos(id)
 );
+
 
 select * from usuario;
 select * from ativos;
