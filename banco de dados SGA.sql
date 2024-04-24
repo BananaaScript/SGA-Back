@@ -2,9 +2,9 @@ create database if not exists SGAbd;
 use SGAbd;
 
 create table if not exists usuario(
-	id int primary key auto_increment,
+	id int primary key,
     nome varchar(50),
-    senha varchar(255),
+    senha varchar(50),
     cpf varchar(50),
     genero varchar(50),
     telefone varchar(50),
@@ -12,8 +12,18 @@ create table if not exists usuario(
     role enum("ADMIN","USER"),
     unique key u_cpf(cpf)
 );
-INSERT INTO usuario (nome, senha, cpf, genero, telefone, email, role) 
-VALUES ('nome', 'senha', 'cpf', 'genero', 'telefone', 'email', 'ADMIN'); 
+
+INSERT INTO usuario(id, nome, senha, cpf, genero, telefone, email, role)
+VALUES
+	("1", "Administrador01","ADMKEY#01", "1111111110", "Indefinido", "(12)00000-0001)", "usuario.adm@gmail.com", "ADMIN" ),
+    ("2", "Administrador02","ADMKEY#02", "1111111111", "Indefinido", "(12)00000-0002)", "usuario.adm@gmail.com", "ADMIN" ),
+    ("3", "Destinatario01","DESTKEY#01", "1111111112", "Indefinido", "(12)00000-0003)", "usuario.dest@gmail.com", "USER" ),
+    ("4", "Destinatario02","DESTKEY#02", "1111111113", "Indefinido", "(12)00000-0004)", "usuario.dest@gmail.com", "USER" ),
+    
+	("98", "admteste","adm", "0000000000", "Indefinido", "(12)00000-0000)", "adm@gmail.com", "ADMIN" ),
+	("99", "Desteste","des", "9999999999", "Indefinido", "(12)99999-9999)", "des@gmail.com", "USER" );
+    
+    
 create table if not exists local(
 	id int primary key,
     estado varchar(50),
@@ -75,7 +85,6 @@ create table if not exists manutencao(
     data_proxima_manutencao date,
     foreign key (id_ativo) references ativos(id)
 );
-
 
 select * from usuario;
 select * from ativos;
