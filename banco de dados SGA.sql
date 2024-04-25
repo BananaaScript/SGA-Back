@@ -43,6 +43,7 @@ create table if not exists categoria(
 create table  if not exists modelo(
 	id int primary key auto_increment,
     id_categoria int,
+    nome_categoria varchar(50),
     nome varchar(50),
     descricao varchar(255),
     modelo varchar(50),
@@ -54,6 +55,8 @@ create table if not exists ativos(
     id_modelo int,
     id_categoria int,
     id_local int,
+    nome_modelo varchar(50),
+    nome_categoria varchar(50),
     nome varchar(50),
     num_ativo varchar(50),
     data_manutencao date,

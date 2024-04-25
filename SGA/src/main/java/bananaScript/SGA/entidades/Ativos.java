@@ -20,6 +20,15 @@ public class Ativos{
 	private Integer id_modelo;
 	
 	@Column
+	private String nome_modelo;
+	
+	@Column
+	private Integer id_categoria;
+	
+	@Column
+	private String nome_categoria;
+	
+	@Column
 	private String nome;
 	
 	@Column(unique = true)
@@ -123,6 +132,31 @@ public class Ativos{
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
+
+	public String getNome_modelo() {
+		return nome_modelo;
+	}
+
+	public void setNome_modelo(String nome_modelo) {
+		this.nome_modelo = nome_modelo;
+	}
+
+	public Integer getId_categoria() {
+		return id_categoria;
+	}
+
+	public void setId_categoria(Integer id_categoria) {
+		this.id_categoria = id_categoria;
+	}
+
+	public String getNome_categoria() {
+		return nome_categoria;
+	}
+
+	public void setNome_categoria(String nome_categoria) {
+		this.nome_categoria = nome_categoria;
+	}
+	
 	
 	
 }

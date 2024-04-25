@@ -53,6 +53,9 @@ public class AtivoControle {
 			ativo.setNumero(novoAtivo.getNumero());
 			ativo.setCep(novoAtivo.getCep());
 			ativo.setId_modelo(novoAtivo.getId_modelo());
+			ativo.setNome_modelo(novoAtivo.getNome_modelo());
+			ativo.setId_categoria(novoAtivo.getId_categoria());
+			ativo.setNome_categoria(novoAtivo.getNome_categoria());
 			repositorio.save(ativo);
 	}
 	

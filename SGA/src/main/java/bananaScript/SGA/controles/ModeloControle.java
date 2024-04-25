@@ -44,6 +44,7 @@ public class ModeloControle {
 			m.setDescricao(modelo.getDescricao());
 			m.setModelo(modelo.getModelo());
 			m.setId_categoria(modelo.getId_categoria());
+			m.setNome_categoria(modelo.getNome_categoria());
 			repo.save(m);
 		}
 	}

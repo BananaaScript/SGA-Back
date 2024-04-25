@@ -14,6 +14,8 @@ public class Modelo {
 	@Column
 	private Integer id_categoria;
 	@Column
+	private String nome_categoria;
+	@Column
 	private String nome;
 	@Column
 	private String descricao;
@@ -49,6 +51,12 @@ public class Modelo {
 	}
 	public void setId_categoria(Integer id_categoria) {
 		this.id_categoria = id_categoria;
+	}
+	public String getNome_categoria() {
+		return nome_categoria;
+	}
+	public void setNome_categoria(String nome_categoria) {
+		this.nome_categoria = nome_categoria;
 	}
 	
 	
