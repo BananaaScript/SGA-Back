@@ -17,7 +17,7 @@ public class Ativos{
 	private Long id;
 	
 	@Column
-	private Integer id_modelo;
+	private Long id_modelo;
 	
 	@Column
 	private String nome_modelo;
@@ -48,7 +48,7 @@ public class Ativos{
 	private String complemento;
 	
 	@Column
-	private Integer numero;
+	private Long numero;
 	
 	@Column
 	private String cep;
@@ -61,11 +61,12 @@ public class Ativos{
 		this.id = id;
 	}
 
-	public Integer getId_modelo() {
+
+	public Long getId_modelo() {
 		return id_modelo;
 	}
 
-	public void setId_modelo(Integer id_modelo) {
+	public void setId_modelo(Long id_modelo) {
 		this.id_modelo = id_modelo;
 	}
 
@@ -117,11 +118,12 @@ public class Ativos{
 		this.complemento = complemento;
 	}
 
-	public Integer getNumero() {
+
+	public Long getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
+	public void setNumero(Long numero) {
 		this.numero = numero;
 	}
 

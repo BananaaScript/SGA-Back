@@ -15,14 +15,14 @@ import org.springframework.web.client.RestTemplate;
 import bananaScript.SGA.entidades.Ativos;
 import bananaScript.SGA.entidades.Notificacao;
 import bananaScript.SGA.repositorios.AtivosRepositorio;
-//import bananaScript.SGA.repositorios.NotificacaoRepositorio;
+import bananaScript.SGA.repositorios.NotificacaoRepositorio;
 @Service
 public class NotificationService {
 	
 	@Autowired
 	private AtivosRepositorio ativosRepo;
-	//@Autowired
-	//private NotificacaoRepositorio notiRepo;
+	@Autowired
+	private NotificacaoRepositorio notiRepo;
 	
 	public void salvarNotificacao(Ativos ativo) {
 		Notificacao noti = new Notificacao();
@@ -37,6 +37,19 @@ public class NotificationService {
 
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.postForObject(rota, requestEntity, String.class);
+	}
+	
+	public void atualizarNotificacao(Long id) {
+		Ativos ativo = ativosRepo.findById(id).orElse(null);
+		List<Notificacao> notis = notiRepo.findAll();
+		for(Notificacao noti : notis) {
+			if(noti.getAtivoNumero().equals(ativo.getNumAtivo())){
+				if(noti.getDataExpiracao() != ativo.getDataManutencao()) {
+					noti.setDataExpiracao(ativo.getDataManutencao());
+					notiRepo.save(noti);
+				}
+			}
+		}
 	}
 	
 	

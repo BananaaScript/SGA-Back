@@ -92,6 +92,6 @@ create table if not exists manutencao(
 
 select * from usuario;
 select * from ativos;
+select * from notificacao;
 select * from categoria;
 select * from modelo;
-select * from notificacao;

@@ -46,7 +46,7 @@ public class AtivoControle {
 		Ativos ativo = repositorio.findById(id).orElse(null);
 		if (ativo != null) {}
 			ativo.setNome(novoAtivo.getNome());
-			ativo.setNumAtivo(novoAtivo.getNumAtivo());
+			ativo.setDataManutencao(novoAtivo.getDataManutencao());
 			ativo.setRua(novoAtivo.getRua());
 			ativo.setBairro(novoAtivo.getBairro());
 			ativo.setComplemento(novoAtivo.getComplemento());
@@ -57,6 +57,7 @@ public class AtivoControle {
 			ativo.setId_categoria(novoAtivo.getId_categoria());
 			ativo.setNome_categoria(novoAtivo.getNome_categoria());
 			repositorio.save(ativo);
+			notifica.atualizarNotificacao(ativo.getId());
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
