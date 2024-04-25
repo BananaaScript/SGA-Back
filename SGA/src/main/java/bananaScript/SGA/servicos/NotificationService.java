@@ -2,6 +2,7 @@ package bananaScript.SGA.servicos;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +15,18 @@ import org.springframework.web.client.RestTemplate;
 import bananaScript.SGA.entidades.Ativos;
 import bananaScript.SGA.entidades.Notificacao;
 import bananaScript.SGA.repositorios.AtivosRepositorio;
+//import bananaScript.SGA.repositorios.NotificacaoRepositorio;
 @Service
 public class NotificationService {
 	
 	@Autowired
 	private AtivosRepositorio ativosRepo;
+	//@Autowired
+	//private NotificacaoRepositorio notiRepo;
 	
 	public void salvarNotificacao(Ativos ativo) {
 		Notificacao noti = new Notificacao();
+		noti.setAtivoNumero(ativo.getNumAtivo());
 		noti.setUsuario(ativo.getNome());
 		noti.setDataExpiracao(ativo.getDataManutencao());
 		String rota = "http://localhost:8080/notifica/cadastrar";
@@ -42,6 +47,13 @@ public class NotificationService {
 		for(Ativos ativo : todosAtivos) {
 			if(ativo.getDataManutencao().before(dataAtual)) {
 				ativosExpirados.add(ativo);
+			}
+		}
+		Iterator<Ativos> iterator = ativosExpirados.iterator();
+		while(iterator.hasNext()) {
+			Ativos ativo = iterator.next();
+			if(ativo.getDataManutencao().after(dataAtual)) {
+				iterator.remove();
 			}
 		}
 		return ativosExpirados;

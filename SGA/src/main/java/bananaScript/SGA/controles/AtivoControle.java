@@ -46,7 +46,7 @@ public class AtivoControle {
 		Ativos ativo = repositorio.findById(id).orElse(null);
 		if (ativo != null) {}
 			ativo.setNome(novoAtivo.getNome());
-			ativo.setNumero_ativo(novoAtivo.getNumero_ativo());
+			ativo.setNumAtivo(novoAtivo.getNumAtivo());
 			ativo.setRua(novoAtivo.getRua());
 			ativo.setBairro(novoAtivo.getBairro());
 			ativo.setComplemento(novoAtivo.getComplemento());

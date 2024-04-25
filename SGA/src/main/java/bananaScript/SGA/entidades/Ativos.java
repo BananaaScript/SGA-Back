@@ -23,7 +23,7 @@ public class Ativos{
 	private String nome;
 	
 	@Column(unique = true)
-	private Integer numero_ativo;
+	private String numAtivo;
 	
 	@Column
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
@@ -67,13 +67,13 @@ public class Ativos{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public Integer getNumero_ativo() {
-		return numero_ativo;
+	
+	public String getNumAtivo() {
+		return numAtivo;
 	}
 
-	public void setNumero_ativo(Integer numero_ativo) {
-		this.numero_ativo = numero_ativo;
+	public void setNumAtivo(String numAtivo) {
+		this.numAtivo = numAtivo;
 	}
 
 	public Date getDataManutencao() {

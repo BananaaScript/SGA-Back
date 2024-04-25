@@ -34,15 +34,6 @@ create table if not exists local(
     cep varchar(50)
 );
 
-create table if not exists notificacao(
-	id int primary key auto_increment,
-    usuario_id int,
-    usuario varchar(50),
-	data_expiracao date,
-    foreign key (usuario_id) references usuario(id)
-);
-
-
 create table if not exists categoria(
 	id int primary key auto_increment,
     nome varchar(50),
@@ -64,17 +55,26 @@ create table if not exists ativos(
     id_categoria int,
     id_local int,
     nome varchar(50),
-    numero_ativo varchar(50),
+    num_ativo varchar(50),
     data_manutencao date,
     rua varchar(50),
     bairro varchar(50),
     complemento varchar(50),
     numero varchar(50),
     cep varchar(50),
-    unique key u_numativo(numero_ativo),
+    unique key u_numativo(num_ativo),
     foreign key (id_modelo) references modelo(id),
     foreign key (id_categoria) references categoria(id),
     foreign key (id_local) references local(id)
+);
+
+create table if not exists notificacao(
+	id int primary key auto_increment,
+    usuario_id int,
+    numero_ativo varchar(50),
+    usuario varchar(50),
+	data_expiracao date,
+    foreign key (usuario_id) references usuario(id)
 );
 
 create table if not exists manutencao(

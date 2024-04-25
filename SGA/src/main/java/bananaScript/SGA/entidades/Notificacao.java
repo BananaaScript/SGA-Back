@@ -16,6 +16,8 @@ public class Notificacao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Column(name = "numero_ativo")
+	private String ativoNumero;
 	@Column
 	private String usuario;
 	@Column
@@ -27,6 +29,12 @@ public class Notificacao {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getAtivoNumero() {
+		return ativoNumero;
+	}
+	public void setAtivoNumero(String ativoNumero) {
+		this.ativoNumero = ativoNumero;
 	}
 	public String getUsuario() {
 		return usuario;

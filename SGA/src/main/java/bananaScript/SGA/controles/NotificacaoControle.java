@@ -45,7 +45,6 @@ public class NotificacaoControle {
 	public void atualizarNotificacao (@PathVariable Long id, @RequestBody Notificacao novaNoti) {
 		Notificacao notificacao = repositorio.findById(id).orElse(null);
 		if (notificacao != null) {
-			notificacao.setUsuario(novaNoti.getUsuario());
 			notificacao.setDataExpiracao(novaNoti.getDataExpiracao());
 		}
 	}
