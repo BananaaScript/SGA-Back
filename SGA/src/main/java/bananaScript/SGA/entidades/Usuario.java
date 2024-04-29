@@ -18,71 +18,70 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Entity
 public class Usuario implements UserDetails, Serializable  {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@Column
-	private String nome;
-	
-	@Column
-	private String senha;
-	
-	@Column
-	@Enumerated(EnumType.STRING)
-	private RoleUsuario role;
-	
-	public Usuario() {}
-	
-	public Usuario(String nome, String senha, RoleUsuario role){
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column
+    private String nome;
+    
+    @Column
+    private String senha;
+    
+    @Column
+    @Enumerated(EnumType.STRING)
+    private RoleUsuario role;
+    
+    public Usuario() {}
+    
+    public Usuario(String nome, String senha, RoleUsuario role){
         this.nome = nome;
         this.senha = senha;
         this.role = role;
     }
-	
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-	    if (this.role == RoleUsuario.ADMIN) {
-	        return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-	    } else {
-	        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-	    }
-	}
-	
-	public Long getId() {
-		return id;
-	}
+    
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this.role == RoleUsuario.ADMIN) {
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        } else {
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+    }
+    
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public String getSenha() {
-		return senha;
-	}
+    public String getSenha() {
+        return senha;
+    }
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-	
-	@Override
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    
+    @Override
     public boolean isAccountNonExpired() {
         return true;
     }
@@ -111,7 +110,4 @@ public class Usuario implements UserDetails, Serializable  {
     public String getUsername() {
         return nome;
     }
-
-
-
 }

@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,8 @@ import bananaScript.SGA.DTO.RegisterDTO;
 import bananaScript.SGA.entidades.Usuario;
 import bananaScript.SGA.repositorios.UsuarioRepositorio;
 import bananaScript.SGA.segurança.TokenService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 @RestController
@@ -27,7 +31,8 @@ public class AuthenticationController {
     private UsuarioRepositorio repositorio;
     @Autowired
     private TokenService tokenService;
-
+    
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AuthenticationDTO data){
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.nome(), data.senha());
@@ -37,7 +42,8 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
-
+    
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/register")
     public ResponseEntity<Void> register(@RequestBody @Valid RegisterDTO data){
         if(this.repositorio.findByNome(data.nome()) != null) return ResponseEntity.badRequest().build();
@@ -48,4 +54,15 @@ public class AuthenticationController {
 
         return ResponseEntity.ok().build();
     }
+    
+    SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+    
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @PostMapping("/logout")
+    public String performLogout(Authentication authentication, HttpServletRequest request, HttpServletResponse response) {
+        this.logoutHandler.logout(request, response, authentication);
+        return "otário 💀";
+    }
+   
+    
 }
