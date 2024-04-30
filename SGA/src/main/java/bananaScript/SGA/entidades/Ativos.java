@@ -10,6 +10,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+/**
+ * 
+ */
 @Entity
 public class Ativos{
 	@Id
@@ -41,14 +44,9 @@ public class Ativos{
 	
 	@Column
 	private String responsavel;
-	@Column
-	private String estado;
 	
 	@Column
 	private String emissorNF;
-	
-	@Column
-	private String documentoFiscal;
 	
 	@Column
 	private String numeroSerie;
@@ -56,28 +54,37 @@ public class Ativos{
 	@Column
 	private String valor;
 	
-	@Column
-	private String garantia;
-	
-	@Column
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
-	private String dataTransacao;
-	
-	
 	@Column(unique = true)
 	private String numAtivo;
 	
 	@Column
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private String dataTransacao;
+	
+	@Column
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date dataManutencao;
 	
+	@Column
+	private String documento_fiscal;
 	
+	@Column
+	private String garantia;
 	
 	@Column
 	private String rua;
 	
 	@Column
 	private String bairro;
+	
+	@Column
+	private String cidade;
+	
+	@Column
+	private String estado;
+	
+	@Column
+	private String pais;
 	
 	@Column
 	private String complemento;
@@ -87,89 +94,6 @@ public class Ativos{
 	
 	@Column
 	private String cep;
-	
-	
-	
-	public String getDescricao() {
-		return descricao;
-	}
-	
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-	
-	public String getComplementoAtivo() {
-		return complementoAtivo;
-	}
-	
-	public void setComplementoAtivo(String complementoAtivo) {
-		this.complementoAtivo = complementoAtivo;
-	}
-	
-	public String getResponsavel() {
-		return responsavel;
-	}
-	
-	public void setResponsavel(String responsavel) {
-		this.responsavel = responsavel;
-	}
-	
-	public String getEstado() {
-		return estado;
-	}
-	
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-	
-	public String getEmissorNF() {
-		return emissorNF;
-	}
-	
-	public void setEmissorNF(String emissorNF) {
-		this.emissorNF = emissorNF;
-	}
-	
-	public String getDocumentoFiscal() {
-		return documentoFiscal;
-	}
-	
-	public void setDocumentoFiscal(String documentoFiscal) {
-		this.documentoFiscal = documentoFiscal;
-	}
-	
-	public String getNumeroSerie() {
-		return numeroSerie;
-	}
-	
-	public void setNumeroSerie(String numeroSerie) {
-		this.numeroSerie = numeroSerie;
-	}
-	
-	public String getValor() {
-		return valor;
-	}
-	
-	public void setValor(String valor) {
-		this.valor = valor;
-	}
-	
-	public String getGarantia() {
-		return garantia;
-	}
-	
-	public void setGarantia(String garantia) {
-		this.garantia = garantia;
-	}
-	
-	public String getDataTransacao() {
-		return dataTransacao;
-	}
-	
-	public void setDataTransacao(String dataTransacao) {
-		this.dataTransacao = dataTransacao;
-	}
-	
 
 	public Long getId() {
 		return id;
@@ -179,78 +103,12 @@ public class Ativos{
 		this.id = id;
 	}
 
-
 	public Long getId_modelo() {
 		return id_modelo;
 	}
 
 	public void setId_modelo(Long id_modelo) {
 		this.id_modelo = id_modelo;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
-	public String getNumAtivo() {
-		return numAtivo;
-	}
-
-	public void setNumAtivo(String numAtivo) {
-		this.numAtivo = numAtivo;
-	}
-
-	public Date getDataManutencao() {
-		return dataManutencao;
-	}
-
-	public void setDataManutencao(Date dataManutencao) {
-		this.dataManutencao = dataManutencao;
-	}
-
-	public String getRua() {
-		return rua;
-	}
-
-	public void setRua(String rua) {
-		this.rua = rua;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-
-	public Long getNumero() {
-		return numero;
-	}
-
-	public void setNumero(Long numero) {
-		this.numero = numero;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
 	}
 
 	public String getNome_modelo() {
@@ -276,6 +134,168 @@ public class Ativos{
 	public void setNome_categoria(String nome_categoria) {
 		this.nome_categoria = nome_categoria;
 	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public String getComplementoAtivo() {
+		return complementoAtivo;
+	}
+
+	public void setComplementoAtivo(String complementoAtivo) {
+		this.complementoAtivo = complementoAtivo;
+	}
+
+	public String getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(String responsavel) {
+		this.responsavel = responsavel;
+	}
+
+	public String getEmissorNF() {
+		return emissorNF;
+	}
+
+	public void setEmissorNF(String emissorNF) {
+		this.emissorNF = emissorNF;
+	}
+
+	public String getNumeroSerie() {
+		return numeroSerie;
+	}
+
+	public void setNumeroSerie(String numeroSerie) {
+		this.numeroSerie = numeroSerie;
+	}
+
+	public String getValor() {
+		return valor;
+	}
+
+	public void setValor(String valor) {
+		this.valor = valor;
+	}
+
+	public String getNumAtivo() {
+		return numAtivo;
+	}
+
+	public void setNumAtivo(String numAtivo) {
+		this.numAtivo = numAtivo;
+	}
+
+	public String getDataTransacao() {
+		return dataTransacao;
+	}
+
+	public void setDataTransacao(String dataTransacao) {
+		this.dataTransacao = dataTransacao;
+	}
+
+	public Date getDataManutencao() {
+		return dataManutencao;
+	}
+
+	public void setDataManutencao(Date dataManutencao) {
+		this.dataManutencao = dataManutencao;
+	}
+
+	public String getDocumento_fiscal() {
+		return documento_fiscal;
+	}
+
+	public void setDocumento_fiscal(String documento_fiscal) {
+		this.documento_fiscal = documento_fiscal;
+	}
+
+	public String getGarantia() {
+		return garantia;
+	}
+
+	public void setGarantia(String garantia) {
+		this.garantia = garantia;
+	}
+
+	public String getRua() {
+		return rua;
+	}
+
+	public void setRua(String rua) {
+		this.rua = rua;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getPais() {
+		return pais;
+	}
+
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public Long getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Long numero) {
+		this.numero = numero;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+	
+	
 	
 	
 	

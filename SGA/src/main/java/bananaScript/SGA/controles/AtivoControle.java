@@ -51,7 +51,7 @@ public class AtivoControle {
 			ativo.setResponsavel(novoAtivo.getResponsavel());
 			ativo.setEstado(novoAtivo.getEstado());
 			ativo.setEmissorNF(novoAtivo.getEmissorNF());
-			ativo.setDocumentoFiscal(novoAtivo.getDocumentoFiscal());
+			ativo.setDocumento_fiscal(novoAtivo.getDocumento_fiscal());
 			ativo.setNumeroSerie(novoAtivo.getNumeroSerie());
 			ativo.setValor(novoAtivo.getValor());
 			ativo.setGarantia(novoAtivo.getGarantia());
