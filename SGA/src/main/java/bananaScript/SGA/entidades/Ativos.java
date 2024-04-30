@@ -28,8 +28,41 @@ public class Ativos{
 	@Column
 	private String nome_categoria;
 	
+	
+	
 	@Column
 	private String nome;
+
+	@Column
+	private String descricao;
+	
+	@Column
+	private String complementoAtivo;
+	
+	@Column
+	private String responsavel;
+	@Column
+	private String estado;
+	
+	@Column
+	private String emissorNF;
+	
+	@Column
+	private String documentoFiscal;
+	
+	@Column
+	private String numeroSerie;
+	
+	@Column
+	private String valor;
+	
+	@Column
+	private String garantia;
+	
+	@Column
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private String dataTransacao;
+	
 	
 	@Column(unique = true)
 	private String numAtivo;
@@ -37,6 +70,8 @@ public class Ativos{
 	@Column
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date dataManutencao;
+	
+	
 	
 	@Column
 	private String rua;
@@ -52,6 +87,89 @@ public class Ativos{
 	
 	@Column
 	private String cep;
+	
+	
+	
+	public String getDescricao() {
+		return descricao;
+	}
+	
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
+	public String getComplementoAtivo() {
+		return complementoAtivo;
+	}
+	
+	public void setComplementoAtivo(String complementoAtivo) {
+		this.complementoAtivo = complementoAtivo;
+	}
+	
+	public String getResponsavel() {
+		return responsavel;
+	}
+	
+	public void setResponsavel(String responsavel) {
+		this.responsavel = responsavel;
+	}
+	
+	public String getEstado() {
+		return estado;
+	}
+	
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
+	public String getEmissorNF() {
+		return emissorNF;
+	}
+	
+	public void setEmissorNF(String emissorNF) {
+		this.emissorNF = emissorNF;
+	}
+	
+	public String getDocumentoFiscal() {
+		return documentoFiscal;
+	}
+	
+	public void setDocumentoFiscal(String documentoFiscal) {
+		this.documentoFiscal = documentoFiscal;
+	}
+	
+	public String getNumeroSerie() {
+		return numeroSerie;
+	}
+	
+	public void setNumeroSerie(String numeroSerie) {
+		this.numeroSerie = numeroSerie;
+	}
+	
+	public String getValor() {
+		return valor;
+	}
+	
+	public void setValor(String valor) {
+		this.valor = valor;
+	}
+	
+	public String getGarantia() {
+		return garantia;
+	}
+	
+	public void setGarantia(String garantia) {
+		this.garantia = garantia;
+	}
+	
+	public String getDataTransacao() {
+		return dataTransacao;
+	}
+	
+	public void setDataTransacao(String dataTransacao) {
+		this.dataTransacao = dataTransacao;
+	}
+	
 
 	public Long getId() {
 		return id;

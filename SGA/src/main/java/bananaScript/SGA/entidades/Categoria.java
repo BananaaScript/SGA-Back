@@ -16,6 +16,17 @@ public class Categoria {
 	private String nome;
 	@Column
 	private String descricao;
+	@Column
+	private String complemento;
+	
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
 
 	public Long getId() {
 		return id;

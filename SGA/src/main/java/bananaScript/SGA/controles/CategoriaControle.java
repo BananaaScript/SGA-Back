@@ -42,6 +42,7 @@ public class CategoriaControle {
 		if (cate != null) {
 			cate.setNome(novaCategoria.getNome());
 			cate.setDescricao(novaCategoria.getDescricao());
+			cate.setComplemento(novaCategoria.getComplemento());
 			repo.save(cate);
 		}
 	}

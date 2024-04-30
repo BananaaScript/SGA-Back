@@ -46,6 +46,16 @@ public class AtivoControle {
 		Ativos ativo = repositorio.findById(id).orElse(null);
 		if (ativo != null) {}
 			ativo.setNome(novoAtivo.getNome());
+			ativo.setDescricao(novoAtivo.getDescricao());
+			ativo.setComplementoAtivo(novoAtivo.getComplementoAtivo());
+			ativo.setResponsavel(novoAtivo.getResponsavel());
+			ativo.setEstado(novoAtivo.getEstado());
+			ativo.setEmissorNF(novoAtivo.getEmissorNF());
+			ativo.setDocumentoFiscal(novoAtivo.getDocumentoFiscal());
+			ativo.setNumeroSerie(novoAtivo.getNumeroSerie());
+			ativo.setValor(novoAtivo.getValor());
+			ativo.setGarantia(novoAtivo.getGarantia());
+			ativo.setDataTransacao(novoAtivo.getDataTransacao());
 			ativo.setDataManutencao(novoAtivo.getDataManutencao());
 			ativo.setRua(novoAtivo.getRua());
 			ativo.setBairro(novoAtivo.getBairro());

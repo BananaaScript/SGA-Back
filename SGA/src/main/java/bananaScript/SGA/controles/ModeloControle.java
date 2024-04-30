@@ -43,6 +43,8 @@ public class ModeloControle {
 			m.setNome(modelo.getNome());
 			m.setDescricao(modelo.getDescricao());
 			m.setModelo(modelo.getModelo());
+			m.setFabricante(modelo.getFabricante());
+			m.setImagem(modelo.getImagem());
 			m.setId_categoria(modelo.getId_categoria());
 			m.setNome_categoria(modelo.getNome_categoria());
 			repo.save(m);

@@ -37,7 +37,8 @@ create table if not exists local(
 create table if not exists categoria(
 	id int primary key auto_increment,
     nome varchar(50),
-    descricao varchar(255)
+    descricao varchar(255),
+    complemento varchar(255)
 );
 
 create table  if not exists modelo(
@@ -47,6 +48,8 @@ create table  if not exists modelo(
     nome varchar(50),
     descricao varchar(255),
     modelo varchar(50),
+    fabricante varchar(50),
+    imagem varchar(255),
     foreign key (id_categoria) references categoria(id)
 );
 
@@ -58,6 +61,15 @@ create table if not exists ativos(
     nome_modelo varchar(50),
     nome_categoria varchar(50),
     nome varchar(50),
+    descricao varchar(255),
+    complementoAtivo varchar(255),
+    responsavel varchar(50),
+    estado varchar(50),
+    emissorNF varchar(255),
+    documentoFiscal varchar(255),
+	numeroSerie varchar(255),
+    valor varchar(50),
+    garantia varchar(50),
     num_ativo varchar(50),
     data_manutencao date,
     rua varchar(50),
