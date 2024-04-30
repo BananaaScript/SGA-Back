@@ -4,11 +4,14 @@ use SGAbd;
 create table if not exists usuario(
 	id int primary key auto_increment,
     nome varchar(50),
+    idade varchar(50),
     senha varchar(255),
+    rg varchar(50),
     cpf varchar(50),
     genero varchar(50),
     telefone varchar(50),
     email varchar(50),
+    imagem varchar(50),
     role enum("ADMIN","USER"),
     unique key u_cpf(cpf)
 );
@@ -53,31 +56,54 @@ create table  if not exists modelo(
     foreign key (id_categoria) references categoria(id)
 );
 
+create table documento_fiscal (
+    id int auto_increment primary key,
+    id_ativo int,
+    tipo_documento varchar(50),
+    numero_documento varchar(50),
+    data_emissao date,
+    valor_total decimal(10, 2)
+);
+
+create table garantia (
+    id int auto_increment primary key,
+    id_ativo int,
+    descricao varchar(255),
+    valor decimal(10, 2),
+    tipo_garantia varchar(50)
+);
+
 create table if not exists ativos(
 	id int primary key auto_increment,
     id_modelo int,
     id_categoria int,
     id_local int,
+    id_documentoFiscal int,
+    id_garantia int,
     nome_modelo varchar(50),
     nome_categoria varchar(50),
     nome varchar(50),
     descricao varchar(255),
     complementoAtivo varchar(255),
     responsavel varchar(50),
-    estado varchar(50),
     emissorNF varchar(255),
-    documentoFiscal varchar(255),
 	numeroSerie varchar(255),
     valor varchar(50),
-    garantia varchar(50),
     num_ativo varchar(50),
     data_manutencao date,
+    data_transacao date,
     rua varchar(50),
     bairro varchar(50),
+    cidade varchar(50),
+    estado varchar(50),
+    pais varchar(50),
     complemento varchar(50),
     numero varchar(50),
     cep varchar(50),
+    estadoAtivo enum("QUEBRADO", "DISPONIVEL", "INATIVO", "DESCARTADO"),
     unique key u_numativo(num_ativo),
+    foreign key (id_documentoFiscal) references documento_fiscal(id),
+    foreign key (id_garantia) references garantia(id),
     foreign key (id_modelo) references modelo(id),
     foreign key (id_categoria) references categoria(id),
     foreign key (id_local) references local(id)

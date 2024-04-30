@@ -42,6 +42,10 @@ public class UsuarioControle {
 	    if (usuario != null) {
 	        usuario.setNome(novoUsuario.getNome());
 	        usuario.setSenha(novoUsuario.getSenha());
+	        usuario.setIdade(novoUsuario.getIdade());
+	        usuario.setTelefone(novoUsuario.getTelefone());
+	        usuario.setEmail(novoUsuario.getEmail());
+	        usuario.setGenero(novoUsuario.getGenero());
 	        repositorio.save(usuario);
 	    }
 	}

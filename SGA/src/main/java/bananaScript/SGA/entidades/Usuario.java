@@ -33,8 +33,29 @@ public class Usuario implements UserDetails, Serializable  {
     @Column
     private String nome;
     
+    @Column 
+    private String idade;
+    
     @Column
     private String senha;
+    
+    @Column 
+    private String rg;
+    
+    @Column
+    private String cpf;
+    
+    @Column
+    private String genero;
+    
+    @Column
+    private String telefone;
+    
+    @Column
+    private String email;
+    
+    @Column 
+    private String imagem;
     
     @Column
     @Enumerated(EnumType.STRING)
@@ -81,7 +102,71 @@ public class Usuario implements UserDetails, Serializable  {
         this.senha = senha;
     }
     
-    @Override
+    public String getIdade() {
+		return idade;
+	}
+
+	public void setIdade(String idade) {
+		this.idade = idade;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
+
+	public RoleUsuario getRole() {
+		return role;
+	}
+
+	public void setRole(RoleUsuario role) {
+		this.role = role;
+	}
+
+	@Override
     public boolean isAccountNonExpired() {
         return true;
     }
