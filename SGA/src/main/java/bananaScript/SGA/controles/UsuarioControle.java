@@ -1,8 +1,11 @@
 package bananaScript.SGA.controles;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import bananaScript.SGA.DTO.UsuarioDTO;
 import bananaScript.SGA.entidades.Usuario;
 import bananaScript.SGA.repositorios.UsuarioRepositorio;
 
@@ -56,5 +60,19 @@ public class UsuarioControle {
 		repositorio.deleteById(id);
 	}
 	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+    @GetMapping("/informacoes")
+    public List<UsuarioDTO> informacoes() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String nome = authentication.getName();
+        Usuario usuario = repositorio.findByNome(nome);
+        
+        UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.getNome(), usuario.getSenha(), usuario.getEmail());
+        
+        List<UsuarioDTO> listaUsuarioDTO = new ArrayList<>();
+        listaUsuarioDTO.add(usuarioDTO);
+        
+        return listaUsuarioDTO;
+    }
 }
 
