@@ -96,6 +96,7 @@ create table if not exists notificacao(
     numero_ativo varchar(50),
     usuario varchar(50),
 	data_expiracao date,
+    dias int,
     foreign key (usuario_id) references usuario(id)
 );
 

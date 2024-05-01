@@ -1,5 +1,8 @@
 package bananaScript.SGA.servicos;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -29,6 +32,11 @@ public class NotificationService {
 		noti.setAtivoNumero(ativo.getNumAtivo());
 		noti.setUsuario(ativo.getNome());
 		noti.setDataExpiracao(ativo.getDataManutencao());
+		
+		LocalDate dataManutencao = ativo.getDataManutencao().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		long diferenca = ChronoUnit.DAYS.between(LocalDate.now(), dataManutencao);
+		noti.setDias(diferenca);
+		
 		String rota = "http://localhost:8080/notifica/cadastrar";
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -39,6 +47,7 @@ public class NotificationService {
 		restTemplate.postForObject(rota, requestEntity, String.class);
 	}
 	
+	
 	public void atualizarNotificacao(Long id) {
 		Ativos ativo = ativosRepo.findById(id).orElse(null);
 		List<Notificacao> notis = notiRepo.findAll();
@@ -46,6 +55,11 @@ public class NotificationService {
 			if(noti.getAtivoNumero().equals(ativo.getNumAtivo())){
 				if(noti.getDataExpiracao() != ativo.getDataManutencao()) {
 					noti.setDataExpiracao(ativo.getDataManutencao());
+					
+					LocalDate dataManutencao = ativo.getDataManutencao().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+					long diferencaUpdate = ChronoUnit.DAYS.between(LocalDate.now(), dataManutencao);
+					noti.setDias(diferencaUpdate);
+					
 					notiRepo.save(noti);
 				}
 			}

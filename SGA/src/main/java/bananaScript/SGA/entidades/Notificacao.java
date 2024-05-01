@@ -23,6 +23,8 @@ public class Notificacao {
 	@Column
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date dataExpiracao;
+	@Column
+	private Long dias;
 	
 	public Long getId() {
 		return id;
@@ -48,6 +50,13 @@ public class Notificacao {
 	public void setDataExpiracao(Date dataExpiracao) {
 		this.dataExpiracao = dataExpiracao;
 	}
+	public Long getDias() {
+		return dias;
+	}
+	public void setDias(Long dias) {
+		this.dias = dias;
+	}
+	
 	
 	
 }
