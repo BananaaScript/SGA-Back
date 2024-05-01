@@ -19,6 +19,7 @@ import bananaScript.SGA.entidades.Ativos;
 import bananaScript.SGA.entidades.Notificacao;
 import bananaScript.SGA.repositorios.AtivosRepositorio;
 import bananaScript.SGA.repositorios.NotificacaoRepositorio;
+import jakarta.annotation.PostConstruct;
 @Service
 public class NotificationService {
 	
@@ -26,6 +27,11 @@ public class NotificationService {
 	private AtivosRepositorio ativosRepo;
 	@Autowired
 	private NotificacaoRepositorio notiRepo;
+	
+	@PostConstruct
+	public void init() {
+		atualizarDias();
+	}
 	
 	public void salvarNotificacao(Ativos ativo) {
 		Notificacao noti = new Notificacao();
@@ -63,6 +69,16 @@ public class NotificationService {
 					notiRepo.save(noti);
 				}
 			}
+		}
+	}
+	
+	public void atualizarDias() {
+		List<Notificacao> notis = notiRepo.findAll();
+		for(Notificacao noti : notis) {
+			LocalDate dataManutencao = noti.getDataExpiracao().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			long diferencaUpdate = ChronoUnit.DAYS.between(LocalDate.now(), dataManutencao);
+			noti.setDias(diferencaUpdate);
+			notiRepo.save(noti);
 		}
 	}
 	
