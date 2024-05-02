@@ -52,7 +52,6 @@ create table  if not exists modelo(
     descricao varchar(255),
     modelo varchar(50),
     fabricante varchar(50),
-    imagem varchar(255),
     foreign key (id_categoria) references categoria(id)
 );
 
@@ -65,10 +64,10 @@ create table if not exists ativos(
     nome_categoria varchar(50),
     nome varchar(50),
     descricao varchar(255) default "Não informado",
-    complemento_ativo varchar(255) default "Não informado",
+    complemento_ativo varchar(255),
     responsavel varchar(50),
-	numero_serie varchar(255) default "Não informado",
-    valor varchar(50) default "Não informado",
+	numero_serie varchar(255),
+    valor varchar(50),
     num_ativo varchar(50),
     data_manutencao date,
     data_transacao date,
@@ -83,8 +82,7 @@ create table if not exists ativos(
     unique key u_numativo(num_ativo),
     foreign key (id_modelo) references modelo(id),
     foreign key (id_categoria) references categoria(id),
-    foreign key (id_responsavel) references usuario(id),
-    foreign key (id_local) references local(id)
+    foreign key (id_responsavel) references usuario(id)
 );
 
 create table if not exists notificacao(

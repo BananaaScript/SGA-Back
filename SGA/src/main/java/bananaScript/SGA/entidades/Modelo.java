@@ -23,8 +23,6 @@ public class Modelo {
 	private String modelo;
 	@Column
 	private String fabricante;
-	@Column
-	private String imagem;
 	
 	
 	public String getFabricante() {
@@ -33,13 +31,6 @@ public class Modelo {
 	public void setFabricante(String fabricante) {
 		this.fabricante = fabricante;
 	}
-	public String getImagem() {
-		return imagem;
-	}
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
-	}
-
 	
 	public Long getId() {
 		return id;
