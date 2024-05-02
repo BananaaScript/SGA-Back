@@ -61,6 +61,7 @@ create table if not exists ativos(
     id_modelo int,
     id_categoria int,
     id_local int,
+    id_responsavel int,
     nome_modelo varchar(50),
     nome_categoria varchar(50),
     nome varchar(50),
@@ -87,6 +88,7 @@ create table if not exists ativos(
     unique key u_numativo(num_ativo),
     foreign key (id_modelo) references modelo(id),
     foreign key (id_categoria) references categoria(id),
+    foreign key (id_responsavel) references usuario(id),
     foreign key (id_local) references local(id)
 );
 

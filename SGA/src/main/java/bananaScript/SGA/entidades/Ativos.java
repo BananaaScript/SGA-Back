@@ -46,6 +46,9 @@ public class Ativos{
 	private String responsavel;
 	
 	@Column
+	private Long id_responsavel;
+	
+	@Column
 	private String emissorNF;
 	
 	@Column
@@ -294,6 +297,16 @@ public class Ativos{
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
+
+	public Long getId_responsavel() {
+		return id_responsavel;
+	}
+
+	public void setId_responsavel(Long id_responsavel) {
+		this.id_responsavel = id_responsavel;
+	}
+	
+	
 	
 	
 	
