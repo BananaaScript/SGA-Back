@@ -72,6 +72,16 @@ public class NotificationService {
 		}
 	}
 	
+	public void deletarNotificacao(Long id) {
+		Ativos ativo = ativosRepo.findById(id).orElse(null);
+		List<Notificacao> notis = notiRepo.findAll();
+		for(Notificacao noti : notis) {
+			if(noti.getAtivoNumero().equals(ativo.getNumAtivo())) {
+				notiRepo.deleteById(noti.getId());
+			}
+		}
+	}
+	
 	public void atualizarDias() {
 		List<Notificacao> notis = notiRepo.findAll();
 		for(Notificacao noti : notis) {

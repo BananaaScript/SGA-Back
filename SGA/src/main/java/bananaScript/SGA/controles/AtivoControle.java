@@ -73,6 +73,7 @@ public class AtivoControle {
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@DeleteMapping("/deletar/{id}")
 	public void deletarAtivo (@PathVariable Long id) {
+		notifica.deletarNotificacao(id);
 		repositorio.deleteById(id);
 	}
 	
