@@ -50,11 +50,8 @@ public class AtivoControle {
 			ativo.setComplementoAtivo(novoAtivo.getComplementoAtivo());
 			ativo.setResponsavel(novoAtivo.getResponsavel());
 			ativo.setEstado(novoAtivo.getEstado());
-			ativo.setEmissorNF(novoAtivo.getEmissorNF());
-			ativo.setDocumento_fiscal(novoAtivo.getDocumento_fiscal());
 			ativo.setNumeroSerie(novoAtivo.getNumeroSerie());
 			ativo.setValor(novoAtivo.getValor());
-			ativo.setGarantia(novoAtivo.getGarantia());
 			ativo.setDataTransacao(novoAtivo.getDataTransacao());
 			ativo.setDataManutencao(novoAtivo.getDataManutencao());
 			ativo.setRua(novoAtivo.getRua());

@@ -9,12 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
 import bananaScript.SGA.entidades.Ativos;
 import bananaScript.SGA.entidades.Notificacao;
 import bananaScript.SGA.repositorios.AtivosRepositorio;
@@ -35,22 +30,16 @@ public class NotificationService {
 	
 	public void salvarNotificacao(Ativos ativo) {
 		Notificacao noti = new Notificacao();
+		noti.setId_usuario(ativo.getId_responsavel());
 		noti.setAtivoNumero(ativo.getNumAtivo());
-		noti.setUsuario(ativo.getNome());
+		noti.setUsuario(ativo.getResponsavel());
 		noti.setDataExpiracao(ativo.getDataManutencao());
 		
 		LocalDate dataManutencao = ativo.getDataManutencao().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		long diferenca = ChronoUnit.DAYS.between(LocalDate.now(), dataManutencao);
 		noti.setDias(diferenca);
 		
-		String rota = "http://localhost:8080/notifica/cadastrar";
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		
-		HttpEntity<Notificacao> requestEntity = new HttpEntity<>(noti, headers);
-
-		RestTemplate restTemplate = new RestTemplate();
-		restTemplate.postForObject(rota, requestEntity, String.class);
+		notiRepo.save(noti);
 	}
 	
 	

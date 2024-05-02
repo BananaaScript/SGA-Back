@@ -19,37 +19,32 @@ public class Ativos{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column
+	@Column 
 	private Long id_modelo;
 	
-	@Column
+	@Column 
+	private Long id_categoria;
+	
+	@Column 
+	private Long id_responsavel;
+	
+	@Column 
 	private String nome_modelo;
 	
-	@Column
-	private Integer id_categoria;
-	
-	@Column
+	@Column 
 	private String nome_categoria;
 	
-	
-	
-	@Column
+	@Column 
 	private String nome;
 
-	@Column
+	@Column 
 	private String descricao;
 	
 	@Column
 	private String complementoAtivo;
 	
-	@Column
+	@Column 
 	private String responsavel;
-	
-	@Column
-	private Long id_responsavel;
-	
-	@Column
-	private String emissorNF;
 	
 	@Column
 	private String numeroSerie;
@@ -57,10 +52,10 @@ public class Ativos{
 	@Column
 	private String valor;
 	
-	@Column(unique = true)
+	@Column (unique = true)
 	private String numAtivo;
 	
-	@Column
+	@Column 
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private String dataTransacao;
 	
@@ -68,23 +63,14 @@ public class Ativos{
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date dataManutencao;
 	
-	@Column
-	private String documento_fiscal;
-	
-	@Column
-	private String garantia;
-	
-	@Column
+	@Column 
 	private String rua;
 	
-	@Column
+	@Column 
 	private String bairro;
 	
 	@Column
 	private String cidade;
-	
-	@Column
-	private String estado;
 	
 	@Column
 	private String pais;
@@ -97,6 +83,9 @@ public class Ativos{
 	
 	@Column
 	private String cep;
+	
+	@Column
+	private String estado;
 
 	public Long getId() {
 		return id;
@@ -122,11 +111,11 @@ public class Ativos{
 		this.nome_modelo = nome_modelo;
 	}
 
-	public Integer getId_categoria() {
+	public Long getId_categoria() {
 		return id_categoria;
 	}
 
-	public void setId_categoria(Integer id_categoria) {
+	public void setId_categoria(Long id_categoria) {
 		this.id_categoria = id_categoria;
 	}
 
@@ -170,14 +159,6 @@ public class Ativos{
 		this.responsavel = responsavel;
 	}
 
-	public String getEmissorNF() {
-		return emissorNF;
-	}
-
-	public void setEmissorNF(String emissorNF) {
-		this.emissorNF = emissorNF;
-	}
-
 	public String getNumeroSerie() {
 		return numeroSerie;
 	}
@@ -216,22 +197,6 @@ public class Ativos{
 
 	public void setDataManutencao(Date dataManutencao) {
 		this.dataManutencao = dataManutencao;
-	}
-
-	public String getDocumento_fiscal() {
-		return documento_fiscal;
-	}
-
-	public void setDocumento_fiscal(String documento_fiscal) {
-		this.documento_fiscal = documento_fiscal;
-	}
-
-	public String getGarantia() {
-		return garantia;
-	}
-
-	public void setGarantia(String garantia) {
-		this.garantia = garantia;
 	}
 
 	public String getRua() {
