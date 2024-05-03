@@ -17,6 +17,7 @@ import bananaScript.SGA.DTO.LoginResponseDTO;
 import bananaScript.SGA.DTO.RegisterDTO;
 import bananaScript.SGA.entidades.Usuario;
 import bananaScript.SGA.repositorios.UsuarioRepositorio;
+import bananaScript.SGA.roles.RoleUsuario;
 import bananaScript.SGA.segurança.TokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -38,10 +39,14 @@ public class AuthenticationController {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.nome(), data.senha());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        var token = tokenService.generateToken((Usuario) auth.getPrincipal());
-
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+        Usuario usuario = (Usuario) auth.getPrincipal();
+        RoleUsuario role = usuario.getRole();
+        
+        var token = tokenService.generateToken(usuario, role);
+        
+        return ResponseEntity.ok(new LoginResponseDTO(token, role));
     }
+
     
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @PostMapping("/register")

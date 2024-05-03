@@ -1,4 +1,6 @@
 package bananaScript.SGA.DTO;
 
-public record LoginResponseDTO(String token) {
+import bananaScript.SGA.roles.RoleUsuario;
+
+public record LoginResponseDTO(String token, RoleUsuario role) {
 }

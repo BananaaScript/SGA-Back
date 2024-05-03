@@ -13,18 +13,20 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 
 import bananaScript.SGA.entidades.Usuario;
+import bananaScript.SGA.roles.RoleUsuario;
 
 @Service
 public class TokenService {
     @Value("${api.security.token.secret}")
     private String secret;
 
-    public String generateToken(Usuario usuario){
+    public String generateToken(Usuario usuario, RoleUsuario role){
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
                     .withIssuer("auth-api")
                     .withSubject(usuario.getNome())
+                    .withClaim("role", role.toString())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
             return token;
