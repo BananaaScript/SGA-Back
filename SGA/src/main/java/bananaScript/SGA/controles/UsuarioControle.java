@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import bananaScript.SGA.DTO.UsuarioDTO;
 import bananaScript.SGA.entidades.Usuario;
 import bananaScript.SGA.repositorios.UsuarioRepositorio;
+import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping("/usuario")
@@ -46,19 +47,20 @@ public class UsuarioControle {
 	    if (usuario != null) {
 	        usuario.setNome(novoUsuario.getNome());
 	        usuario.setSenha(novoUsuario.getSenha());
-	        usuario.setIdade(novoUsuario.getIdade());
+	        usuario.setCpf(novoUsuario.getCpf());
+	        usuario.setRg(novoUsuario.getRg());
 	        usuario.setTelefone(novoUsuario.getTelefone());
 	        usuario.setEmail(novoUsuario.getEmail());
-	        usuario.setGenero(novoUsuario.getGenero());
 	        repositorio.save(usuario);
 	    }
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@DeleteMapping("/deletar/{id}")
-	public void deletarUsuario (@PathVariable Long id) {
-		repositorio.deleteById(id);
-	}
+    @Transactional
+    @DeleteMapping("/deletar/{id}")
+    public void deletarUsuario(@PathVariable Long id) {
+        repositorio.deleteById(id);
+    }
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/informacoes")
