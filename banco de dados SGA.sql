@@ -17,12 +17,7 @@ create table if not exists usuario(
 );
 
 INSERT INTO usuario(id, nome, senha, cpf, genero, telefone, email, role)
-VALUES
-	("1", "Administrador01","ADMKEY#01", "1111111110", "Indefinido", "(12)00000-0001)", "usuario.adm@gmail.com", "ADMIN" ),
-    ("2", "Administrador02","ADMKEY#02", "1111111111", "Indefinido", "(12)00000-0002)", "usuario.adm@gmail.com", "ADMIN" ),
-    ("3", "Destinatario01","DESTKEY#01", "1111111112", "Indefinido", "(12)00000-0003)", "usuario.dest@gmail.com", "USER" ),
-    ("4", "Destinatario02","DESTKEY#02", "1111111113", "Indefinido", "(12)00000-0004)", "usuario.dest@gmail.com", "USER" ),
-    
+VALUES    
 	("98", "admteste","adm", "0000000000", "Indefinido", "(12)00000-0000)", "adm@gmail.com", "ADMIN" ),
 	("99", "Desteste","des", "9999999999", "Indefinido", "(12)99999-9999)", "des@gmail.com", "USER" );
  
