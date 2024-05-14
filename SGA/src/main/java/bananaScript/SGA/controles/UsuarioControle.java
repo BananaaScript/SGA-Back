@@ -69,7 +69,7 @@ public class UsuarioControle {
         String nome = authentication.getName();
         Usuario usuario = repositorio.findByNome(nome);
         
-        UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.getNome(), usuario.getSenha(), usuario.getEmail());
+        UsuarioDTO usuarioDTO = new UsuarioDTO(usuario.getNome(), usuario.getSenha(), usuario.getEmail(), usuario.getCpf(), usuario.getTelefone());
         
         List<UsuarioDTO> listaUsuarioDTO = new ArrayList<>();
         listaUsuarioDTO.add(usuarioDTO);
