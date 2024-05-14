@@ -38,6 +38,11 @@ create table if not exists categoria(
     descricao varchar(255),
     complemento varchar(255)
 );
+INSERT INTO categoria(id, nome, descricao, complemento)
+VALUES
+	("10", "CategoriaTeste1", "teste de categoria", "nenhum"),
+    ("11", "CategoriaTeste2", "segundo teste de categoria", "nenhum");
+    
 
 create table  if not exists modelo(
 	id int primary key auto_increment,
