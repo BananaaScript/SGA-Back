@@ -55,6 +55,10 @@ create table  if not exists modelo(
     foreign key (id_categoria) references categoria(id)
 );
 
+INSERT INTO modelo(id, id_categoria, nome_categoria, nome, descricao, modelo)
+VALUES
+	("2", "10", "CategoriaTeste1", "Modelo 1", "Primeiro modelo", "A3SA1231-12");
+
 create table if not exists ativos(
 	id int primary key auto_increment,
     id_modelo int,

@@ -9,11 +9,15 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
 import bananaScript.SGA.entidades.Ativos;
 import bananaScript.SGA.entidades.Notificacao;
+import bananaScript.SGA.entidades.Usuario;
 import bananaScript.SGA.repositorios.AtivosRepositorio;
 import bananaScript.SGA.repositorios.NotificacaoRepositorio;
+import bananaScript.SGA.repositorios.UsuarioRepositorio;
 import jakarta.annotation.PostConstruct;
 @Service
 public class NotificationService {
@@ -22,6 +26,10 @@ public class NotificationService {
 	private AtivosRepositorio ativosRepo;
 	@Autowired
 	private NotificacaoRepositorio notiRepo;
+	@Autowired
+	private EmailService email;
+	@Autowired
+	private UsuarioRepositorio userRepo;
 	
 	@PostConstruct
 	public void init() {
@@ -38,8 +46,8 @@ public class NotificationService {
 		LocalDate dataManutencao = ativo.getDataManutencao().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		long diferenca = ChronoUnit.DAYS.between(LocalDate.now(), dataManutencao);
 		noti.setDias(diferenca);
-		
 		notiRepo.save(noti);
+		verificar();
 	}
 	
 	
@@ -78,6 +86,20 @@ public class NotificationService {
 			long diferencaUpdate = ChronoUnit.DAYS.between(LocalDate.now(), dataManutencao);
 			noti.setDias(diferencaUpdate);
 			notiRepo.save(noti);
+		}
+	}
+	
+	@Scheduled(cron = "0 * * * * *")
+	public void verificar() {
+		List<Notificacao> notis = notiRepo.findAll();
+		for(Notificacao noti : notis) {
+			Usuario user = userRepo.findById(noti.getId_usuario()).orElse(null);
+			if(noti.getDias() <= 0) {
+				email.enviarEmail(user.getEmail(), "Data de manutenção expirada", "A data de manutenção do seu ativo expirou!");
+			}
+			else if(noti.getDias() >=3 || noti.getDias() <= 10) {
+				email.enviarEmail(user.getEmail(), "Data de manutenção vai expirar entre 10 e 3 dias!", "Verifique a data de manutenção do seu ativo, ele pode expirar em 10 dias!");
+			}
 		}
 	}
 	

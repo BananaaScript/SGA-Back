@@ -20,7 +20,6 @@ public class EmailService {
 		mensagem.setSubject(subject);
 		
 		mailSender.send(mensagem);
-		System.out.println("Email enviado!");
 	}
 
 }
