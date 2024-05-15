@@ -1,8 +1,11 @@
 package bananaScript.SGA.controles;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import bananaScript.SGA.entidades.Ativos;
+import bananaScript.SGA.entidades.Usuario;
 import bananaScript.SGA.repositorios.AtivosRepositorio;
+import bananaScript.SGA.repositorios.UsuarioRepositorio;
 import bananaScript.SGA.servicos.NotificationService;
 
 @RestController
@@ -23,6 +28,9 @@ public class AtivoControle {
 	
 	@Autowired
 	private AtivosRepositorio repositorio;
+	
+	@Autowired
+	private UsuarioRepositorio usuarioRepositorio;
 	
 	@Autowired
 	private NotificationService notifica;
@@ -73,5 +81,18 @@ public class AtivoControle {
 		notifica.deletarNotificacao(id);
 		repositorio.deleteById(id);
 	}
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@GetMapping("/usuario")
+	public List<Ativos> obeterAtivos(){
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String nomeUsuario = authentication.getName();
+		Usuario usuario = usuarioRepositorio.findByNome(nomeUsuario);
+		
+		return repositorio.findAll().stream()
+									.filter(ativo -> ativo.getId_responsavel().equals(usuario.getId()))
+									.collect(Collectors.toList());
+	};
+	
 	
 }

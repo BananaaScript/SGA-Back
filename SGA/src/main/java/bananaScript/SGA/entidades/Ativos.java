@@ -10,9 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-/**
- * 
- */
 @Entity
 public class Ativos{
 	@Id
@@ -269,12 +266,6 @@ public class Ativos{
 
 	public void setId_responsavel(Long id_responsavel) {
 		this.id_responsavel = id_responsavel;
-	}
-	
-	
-	
-	
-	
-	
+	}	
 	
 }
