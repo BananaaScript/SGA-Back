@@ -127,6 +127,43 @@ public class AtivoControle {
 	    }
 	    return soma;
 	}
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@GetMapping("/quantidadeativosporcategoria/{id_categoria}")
+	public Long obterQuantidadeAtivosPorCategoria(@PathVariable Long id_categoria) {
+	    List<Ativos> ativos = repositorio.findAll();
+	    
+	    Long quantidade = 0L;
+	    for (Ativos ativo : ativos) {
+	        if (ativo.getId_categoria().equals(id_categoria)) {
+	            quantidade++;
+	        }
+	    }
+	    return quantidade;
+	}
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@GetMapping("/quantidadeativospormodelo/{id_modelo}")
+	public Long obterQuantidadeAtivosPorModelo(@PathVariable Long id_modelo) {
+	    List<Ativos> ativos = repositorio.findAll();
+	    
+	    Long quantidade = 0L;
+	    for (Ativos ativo : ativos) {
+	        if (ativo.getId_modelo().equals(id_modelo)) {
+	            quantidade++;
+	        }
+	    }
+	    return quantidade;
+	}
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@GetMapping("/quantidadeativos")
+	public Long obterQuantidadeTotalAtivos() {
+	    List<Ativos> ativos = repositorio.findAll();
+	    return (long) ativos.size();
+	}
+
+
 
 
 	
