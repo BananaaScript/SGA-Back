@@ -83,6 +83,54 @@ public class AtivoControle {
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@GetMapping("/totalvalorativos")
+	public Double obterValorTodosAtivos() {
+	    List<Ativos> ativos = repositorio.findAll();
+	    double soma = 0.0;
+	    for (Ativos ativo : ativos) {
+	        if (ativo.getValor() != null && !ativo.getValor().isEmpty()) {
+	            soma += Double.parseDouble(ativo.getValor());
+	        }
+	    }
+	    return soma;
+	}
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@GetMapping("/totalvalorativospormodelo/{id_modelo}")
+	public Double obterValorTotalAtivosPorModelo(@PathVariable Long id_modelo) {
+	    List<Ativos> ativos = repositorio.findAll();
+
+	    double soma = 0.0;
+	    for (Ativos ativo : ativos) {
+	        if (ativo.getId_modelo().equals(id_modelo)) {
+	            if (ativo.getValor() != null && !ativo.getValor().isEmpty()) {
+	            	
+	                soma += Double.parseDouble(ativo.getValor());
+	            }
+	        }
+	    }
+	    return soma;
+	}
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@GetMapping("/totalvalorativosporcategoria/{id_categoria}")
+	public Double obterValorTotalAtivosPorCategoria(@PathVariable Long id_categoria) {
+	    List<Ativos> ativos = repositorio.findAll();
+
+	    double soma = 0.0;
+	    for (Ativos ativo : ativos) {
+	        if (ativo.getId_categoria().equals(id_categoria)) {
+	            if (ativo.getValor() != null && !ativo.getValor().isEmpty()) {
+	                soma += Double.parseDouble(ativo.getValor());
+	            }
+	        }
+	    }
+	    return soma;
+	}
+
+
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/usuario")
 	public List<Ativos> obeterAtivos(){
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
