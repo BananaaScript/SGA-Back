@@ -1,4 +1,4 @@
-package bananaScript.SGA.controles;
+	package bananaScript.SGA.controles;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import bananaScript.SGA.DTO.AtivoNotificacao;
 import bananaScript.SGA.entidades.Ativos;
+import bananaScript.SGA.entidades.Notificacao;
 import bananaScript.SGA.entidades.Usuario;
 import bananaScript.SGA.repositorios.AtivosRepositorio;
+import bananaScript.SGA.repositorios.NotificacaoRepositorio;
 import bananaScript.SGA.repositorios.UsuarioRepositorio;
 import bananaScript.SGA.servicos.NotificationService;
 
@@ -31,6 +34,9 @@ public class AtivoControle {
 	
 	@Autowired
 	private UsuarioRepositorio usuarioRepositorio;
+
+    @Autowired
+    private NotificacaoRepositorio notificacaoRepositorio;
 	
 	@Autowired
 	private NotificationService notifica;
@@ -166,18 +172,42 @@ public class AtivoControle {
 
 
 
-	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/usuario")
-	public List<Ativos> obeterAtivos(){
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String nomeUsuario = authentication.getName();
-		Usuario usuario = usuarioRepositorio.findByNome(nomeUsuario);
-		
-		return repositorio.findAll().stream()
-									.filter(ativo -> ativo.getId_responsavel().equals(usuario.getId()))
-									.collect(Collectors.toList());
-	};
-	
+	public List<AtivoNotificacao> obeterAtivos() {
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String nomeUsuario = authentication.getName();
+	    Usuario usuario = usuarioRepositorio.findByNome(nomeUsuario);
+
+	    List<Ativos> ativosDoUsuario = repositorio.findAll().stream()
+	            .filter(ativo -> ativo.getId_responsavel().equals(usuario.getId()))
+	            .collect(Collectors.toList());
+
+	    List<AtivoNotificacao> resultado = ativosDoUsuario.stream().map(ativo -> {
+	        List<Notificacao> notificacoes = notificacaoRepositorio.findByAtivoNumero(ativo.getNumAtivo());
+	        AtivoNotificacao dto = new AtivoNotificacao();
+	        dto.setIdAtivo(ativo.getId());
+	        dto.setNome(ativo.getNome());
+	        dto.setDescricao(ativo.getDescricao());
+	        dto.setResponsavel(ativo.getResponsavel());
+	        dto.setNumeroSerie(ativo.getNumeroSerie());
+	        dto.setValor(ativo.getValor());
+	        dto.setNumAtivo(ativo.getNumAtivo());
+	        dto.setDataManutencao(ativo.getDataManutencao());
+	        if (!notificacoes.isEmpty()) {
+	            Notificacao notificacao = notificacoes.get(0);
+	            dto.setDataExpiracao(notificacao.getDataExpiracao());
+	            dto.setDias(notificacao.getDias());
+	        } else {
+	            dto.setDataExpiracao(null);
+	            dto.setDias(null);
+	        }
+	        return dto;
+	    }).collect(Collectors.toList());
+
+	    return resultado;
+	}
+
+
 	
 }
