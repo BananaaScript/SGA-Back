@@ -70,7 +70,6 @@ CREATE TABLE IF NOT EXISTS ativos(
     descricao VARCHAR(255) DEFAULT 'Não informado',
     complemento_ativo VARCHAR(255),
     responsavel VARCHAR(50),
-	numero_serie VARCHAR(255),
     valor VARCHAR(50),
     num_ativo VARCHAR(50),
     data_manutencao DATE,
@@ -108,16 +107,13 @@ CREATE TABLE IF NOT EXISTS manutencao(
     FOREIGN KEY (id_ativo) REFERENCES ativos(id)
 );
 
-INSERT INTO ativos (id_modelo, id_categoria, id_responsavel, nome_modelo, nome_categoria, nome, responsavel, numero_serie, valor, num_ativo, data_manutencao, data_transacao, rua, bairro, cidade, pais, complemento, numero, cep, estado)
-VALUES (2, 10, 98, 'Modelo 1', 'CategoriaTeste1', 'Ativo 1', 'admteste', 'SN123456', '1000', 'A124', '2024-01-01', '2024-01-01', 'Rua X', 'Bairro Y', 'Cidade Z', 'País W', 'Complemento', '123', '00000-000', 'DISPONIVEL');
-INSERT INTO ativos (id_modelo, id_categoria, id_responsavel, nome_modelo, nome_categoria, nome, responsavel, numero_serie, valor, num_ativo, data_manutencao, data_transacao, rua, bairro, cidade, pais, complemento, numero, cep, estado)
-VALUES (2, 10, 98, 'Modelo 2', 'CategoriaTeste1', 'Ativo 2', 'admteste', 'SN123457', '2000', 'A125', '2025-01-01', '2023-01-08', 'Rua X', 'Bairro Y', 'Cidade Z', 'País W', 'Complemento', '123', '00000-000', 'INATIVO');
-INSERT INTO ativos (id_modelo, id_categoria, id_responsavel, nome_modelo, nome_categoria, nome, responsavel, numero_serie, valor, num_ativo, data_manutencao, data_transacao, rua, bairro, cidade, pais, complemento, numero, cep, estado)
-VALUES (2, 10, 99, 'Modelo 3', 'CategoriaTeste1', 'Ativo 3', 'Desteste', 'SN123458', '3000', 'A126', '2024-02-02', '2023-01-11', 'Rua X', 'Bairro Y', 'Cidade Z', 'País W', 'Complemento', '123', '00000-000', 'DESCARTADO');
-INSERT INTO ativos (id_modelo, id_categoria, id_responsavel, nome_modelo, nome_categoria, nome, responsavel, numero_serie, valor, num_ativo, data_manutencao, data_transacao, rua, bairro, cidade, pais, complemento, numero, cep, estado)
-VALUES (2, 10, 99, 'Modelo 4', 'CategoriaTeste1', 'Ativo 4', 'Desteste', 'SN123459', '4000', 'A127', '2024-03-03', '2023-01-10', 'Rua X', 'Bairro Y', 'Cidade Z', 'País W', 'Complemento', '123', '00000-000', 'DISPONIVEL');
-INSERT INTO ativos (id_modelo, id_categoria, id_responsavel, nome_modelo, nome_categoria, nome, responsavel, numero_serie, valor, num_ativo, data_manutencao, data_transacao, rua, bairro, cidade, pais, complemento, numero, cep, estado)
-VALUES (2, 10, 98, 'Modelo 5', 'CategoriaTeste1', 'Ativo 5', 'admteste', 'SN123450', '5000', 'A128', '2024-04-04', '2023-01-12', 'Rua X', 'Bairro Y', 'Cidade Z', 'País W', 'Complemento', '123', '00000-000', 'DESCARTADO');
+INSERT INTO ativos (id_modelo, id_categoria, id_responsavel, nome_modelo, nome_categoria, nome, responsavel, valor, num_ativo, data_manutencao, data_transacao, rua, bairro, cidade, pais, complemento, numero, cep, estado)
+VALUES 
+(2, 10, 98, 'Modelo 1', 'CategoriaTeste1', 'Ativo 1', 'admteste', '1000', 'A124', '2024-01-01', '2024-01-01', 'Rua X', 'Bairro Y', 'Cidade Z', 'País W', 'Complemento', '123', '00000-000', 'DISPONIVEL'),
+(2, 10, 98, 'Modelo 2', 'CategoriaTeste1', 'Ativo 2', 'admteste', '2000', 'A125', '2025-01-01', '2023-01-08', 'Rua X', 'Bairro Y', 'Cidade Z', 'País W', 'Complemento', '123', '00000-000', 'INATIVO'),
+(2, 10, 99, 'Modelo 3', 'CategoriaTeste1', 'Ativo 3', 'Desteste', '3000', 'A126', '2024-02-02', '2023-01-11', 'Rua X', 'Bairro Y', 'Cidade Z', 'País W', 'Complemento', '123', '00000-000', 'DESCARTADO'),
+(2, 10, 99, 'Modelo 4', 'CategoriaTeste1', 'Ativo 4', 'Desteste', '4000', 'A127', '2024-03-03', '2023-01-10', 'Rua X', 'Bairro Y', 'Cidade Z', 'País W', 'Complemento', '123', '00000-000', 'DISPONIVEL'),
+(2, 10, 98, 'Modelo 5', 'CategoriaTeste1', 'Ativo 5', 'admteste', '5000', 'A128', '2024-04-04', '2023-01-12', 'Rua X', 'Bairro Y', 'Cidade Z', 'País W', 'Complemento', '123', '00000-000', 'DESCARTADO');
 
 SELECT * FROM usuario;
 SELECT * FROM ativos;
