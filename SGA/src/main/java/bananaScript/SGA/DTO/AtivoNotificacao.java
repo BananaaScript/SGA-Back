@@ -7,7 +7,6 @@ public class AtivoNotificacao {
     private String nome;
     private String descricao;
     private String responsavel;
-    private String numeroSerie;
     private String valor;
     private String numAtivo;
     private Date dataManutencao;
@@ -46,14 +45,7 @@ public class AtivoNotificacao {
     public void setResponsavel(String responsavel) {
         this.responsavel = responsavel;
     }
-
-    public String getNumeroSerie() {
-        return numeroSerie;
-    }
-
-    public void setNumeroSerie(String numeroSerie) {
-        this.numeroSerie = numeroSerie;
-    }
+    
 
     public String getValor() {
         return valor;

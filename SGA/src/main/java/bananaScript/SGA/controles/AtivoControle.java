@@ -64,7 +64,6 @@ public class AtivoControle {
 			ativo.setComplementoAtivo(novoAtivo.getComplementoAtivo());
 			ativo.setResponsavel(novoAtivo.getResponsavel());
 			ativo.setEstado(novoAtivo.getEstado());
-			ativo.setNumeroSerie(novoAtivo.getNumeroSerie());
 			ativo.setValor(novoAtivo.getValor());
 			ativo.setDataTransacao(novoAtivo.getDataTransacao());
 			ativo.setDataManutencao(novoAtivo.getDataManutencao());
@@ -190,7 +189,6 @@ public class AtivoControle {
 	        dto.setNome(ativo.getNome());
 	        dto.setDescricao(ativo.getDescricao());
 	        dto.setResponsavel(ativo.getResponsavel());
-	        dto.setNumeroSerie(ativo.getNumeroSerie());
 	        dto.setValor(ativo.getValor());
 	        dto.setNumAtivo(ativo.getNumAtivo());
 	        dto.setDataManutencao(ativo.getDataManutencao());

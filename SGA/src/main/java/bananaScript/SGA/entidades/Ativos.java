@@ -43,8 +43,6 @@ public class Ativos{
 	@Column 
 	private String responsavel;
 	
-	@Column
-	private String numeroSerie;
 	
 	@Column
 	private String valor;
@@ -154,14 +152,6 @@ public class Ativos{
 
 	public void setResponsavel(String responsavel) {
 		this.responsavel = responsavel;
-	}
-
-	public String getNumeroSerie() {
-		return numeroSerie;
-	}
-
-	public void setNumeroSerie(String numeroSerie) {
-		this.numeroSerie = numeroSerie;
 	}
 
 	public String getValor() {
