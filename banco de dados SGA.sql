@@ -70,7 +70,6 @@ CREATE TABLE IF NOT EXISTS ativos(
     descricao VARCHAR(255) DEFAULT 'Não informado',
     complemento_ativo VARCHAR(255),
     responsavel VARCHAR(50),
-	numero_serie VARCHAR(255),
     valor VARCHAR(50),
     num_ativo VARCHAR(50),
     data_manutencao DATE,

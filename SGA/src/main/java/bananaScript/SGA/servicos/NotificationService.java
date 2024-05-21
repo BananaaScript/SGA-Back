@@ -47,7 +47,6 @@ public class NotificationService {
 		long diferenca = ChronoUnit.DAYS.between(LocalDate.now(), dataManutencao);
 		noti.setDias(diferenca);
 		notiRepo.save(noti);
-		verificar();
 	}
 	
 	
