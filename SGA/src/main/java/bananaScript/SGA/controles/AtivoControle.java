@@ -1,5 +1,7 @@
 	package bananaScript.SGA.controles;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -166,6 +168,98 @@ public class AtivoControle {
 	public Long obterQuantidadeTotalAtivos() {
 	    List<Ativos> ativos = repositorio.findAll();
 	    return (long) ativos.size();
+	}
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@GetMapping("/valorativosateseismesesatras")
+	public Double obterValorAtivosAteSeisMesesAtras() {
+	    LocalDate dataAtual = LocalDate.now();
+	    LocalDate dataSeisMesesAtras = dataAtual.minusMonths(6);
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+	    List<Ativos> ativos = repositorio.findAll();
+
+	    double soma = 0.0;
+	    for (Ativos ativo : ativos) {
+	        if (ativo.getDataTransacao() != null) {
+	           
+	                LocalDate dataTransacao = LocalDate.parse(ativo.getDataTransacao(), formatter);
+	                if (dataTransacao.isBefore(dataSeisMesesAtras)) {
+	                    if (ativo.getValor() != null && !ativo.getValor().isEmpty()) {
+	                        soma += Double.parseDouble(ativo.getValor());
+	                    }
+	                }
+	            
+	        }
+	    }
+	    return soma;
+	}
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@GetMapping("/valorativosatedozemesesatras")
+	public Double obterValorAtivosAteDozeMesesAtras() {
+	    LocalDate dataAtual = LocalDate.now();
+	    LocalDate dataDozeMesesAtras = dataAtual.minusMonths(12);
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+	    List<Ativos> ativos = repositorio.findAll();
+
+	    double soma = 0.0;
+	    for (Ativos ativo : ativos) {
+	        if (ativo.getDataTransacao() != null) {
+	           
+	                LocalDate dataTransacao = LocalDate.parse(ativo.getDataTransacao(), formatter);
+	                if (dataTransacao.isBefore(dataDozeMesesAtras)) {
+	                    if (ativo.getValor() != null && !ativo.getValor().isEmpty()) {
+	                        soma += Double.parseDouble(ativo.getValor());
+	                    }
+	                }
+	            
+	        }
+	    }
+	    return soma;
+	}
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@GetMapping("/quantidadeativosseismesesatras")
+	public Long obterQuantidadeAtivosAteSeisMesesAtras() {
+	    LocalDate dataAtual = LocalDate.now();
+	    LocalDate dataSeisMesesAtras = dataAtual.minusMonths(6);
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+	    List<Ativos> ativos = repositorio.findAll();
+
+	    long quantidade = 0;
+	    for (Ativos ativo : ativos) {
+	        if (ativo.getDataTransacao() != null) {
+	            LocalDate dataTransacao = LocalDate.parse(ativo.getDataTransacao(), formatter);
+	            if (dataTransacao.isBefore(dataSeisMesesAtras)) {
+	                quantidade++;
+	            }
+	        }
+	    }
+	    return quantidade;
+	}
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@GetMapping("/quantidadeativosdozemesesatras")
+	public Long obterQuantidadeAtivosAteDozeMesesAtras() {
+	    LocalDate dataAtual = LocalDate.now();
+	    LocalDate dataDozeMesesAtras = dataAtual.minusMonths(12);
+	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+	    List<Ativos> ativos = repositorio.findAll();
+
+	    long quantidade = 0;
+	    for (Ativos ativo : ativos) {
+	        if (ativo.getDataTransacao() != null) {
+	            LocalDate dataTransacao = LocalDate.parse(ativo.getDataTransacao(), formatter);
+	            if (dataTransacao.isBefore(dataDozeMesesAtras)) {
+	                quantidade++;
+	            }
+	        }
+	    }
+	    return quantidade;
 	}
 
 
