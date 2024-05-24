@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import bananaScript.SGA.DTO.UsuarioDTO;
 import bananaScript.SGA.entidades.Usuario;
@@ -27,6 +29,7 @@ public class UsuarioControle {
 	
 	@Autowired
 	private UsuarioRepositorio repositorio;
+	
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PostMapping("/cadastrar")
@@ -59,7 +62,15 @@ public class UsuarioControle {
     @Transactional
     @DeleteMapping("/deletar/{id}")
     public void deletarUsuario(@PathVariable Long id) {
-        repositorio.deleteById(id);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String nomeUsusario = authentication.getName();
+		Usuario usuario = repositorio.findByNome(nomeUsusario);
+		
+		if (usuario != null && usuario.getId().equals(id)) {
+	        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Você não pode deletar o seu próprio usuário.");
+	    } else {
+	        repositorio.deleteById(id);
+	    }
     }
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
