@@ -95,10 +95,12 @@ public class NotificationService {
 		for(Notificacao noti : notis) {
 			Usuario user = userRepo.findById(noti.getId_usuario()).orElse(null);
 			if(noti.getDias() <= 0) {
-				email.enviarEmail(user.getEmail(), "Data de manutenção expirada", "A data de manutenção do seu ativo expirou!");
+				String mensagem = String.format("%s a data de manutenção do seu ativo expirou!", user.getNome());
+				email.enviarEmail(user.getEmail(), "Data de manutenção expirada", mensagem);
 			}
 			else if(noti.getDias() >=3 || noti.getDias() <= 10) {
-				email.enviarEmail(user.getEmail(), "Data de manutenção vai expirar entre 10 e 3 dias!", "Verifique a data de manutenção do seu ativo, ele pode expirar em 10 dias!");
+				String mensagem = String.format("%s, verifique a data de manutenção do seu ativo, ele pode expirar em 10 dias!", user.getNome());
+				email.enviarEmail(user.getEmail(), "Data de manutenção expira entre 10 e 3 dias!", mensagem);
 			}
 		}
 	}

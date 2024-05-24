@@ -18,8 +18,8 @@ CREATE TABLE IF NOT EXISTS usuario(
 
 INSERT INTO usuario(id, nome, senha, cpf, genero, telefone, email, role)
 VALUES    
-	(98, 'admteste','adm', '0000000000', 'Indefinido', '(12)00000-0000', 'adm@gmail.com', 'ADMIN' ),
-	(99, 'Desteste','des', '9999999999', 'Indefinido', '(12)99999-9999', 'des@gmail.com', 'USER' );
+	(98, 'admteste','adm', '0000000000', 'Indefinido', '(12)00000-0000', 'codeapi23@gmail.com', 'ADMIN' ),
+	(99, 'Desteste','des', '9999999999', 'Indefinido', '(12)99999-9999', 'codeapi23@gmail.com', 'USER' );
 
 CREATE TABLE IF NOT EXISTS local(
 	id INT PRIMARY KEY AUTO_INCREMENT,
