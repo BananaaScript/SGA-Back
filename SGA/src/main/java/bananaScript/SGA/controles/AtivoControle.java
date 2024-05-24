@@ -2,10 +2,12 @@
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -299,7 +301,19 @@ public class AtivoControle {
 
 	    return resultado;
 	}
-
-
+	
+	@Scheduled(cron = "0 * * * * *")
+	public void ativosEmManutencao() {
+		List<Ativos> ativos = repositorio.findAll();
+		Date dataAtual = new Date();
+		for(Ativos ativo : ativos) {
+			if(ativo.getDataManutencao().before(dataAtual)) {
+				ativo.setEstado("EM MANUTENÇÃO");
+				ativo.setResponsavel("admteste");
+				ativo.setId_responsavel(98L);
+				repositorio.save(ativo);
+			}
+		}
+	}
 	
 }

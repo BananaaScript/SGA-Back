@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS ativos(
     nome VARCHAR(50),
     descricao VARCHAR(255) DEFAULT 'Não informado',
     complemento_ativo VARCHAR(255) DEFAULT 'Não informado',
-    responsavel VARCHAR(50),
+    responsavel VARCHAR(50) DEFAULT 'Não atribuído',
     valor VARCHAR(50),
     num_ativo VARCHAR(50),
     data_manutencao DATE,
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS notificacao(
     numero_ativo VARCHAR(50),
     usuario VARCHAR(50),
 	data_expiracao DATE,
-    dias INT,
+    dias INT DEFAULT 20,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id)
 );
 
@@ -115,13 +115,13 @@ VALUES
 (2, 10, 99, 'Modelo 4', 'CategoriaTeste1', 'Ativo 4', 'Desteste', '4000', 'A127', '2024-07-20', '2023-01-10', 'Rua X', 'Bairro Y', 'Cidade Z', 'País W', 'Complemento', '123', '00000-000', 'DISPONIVEL'),
 (2, 10, 98, 'Modelo 5', 'CategoriaTeste1', 'Ativo 5', 'admteste', '5000', 'A128', '2024-07-25', '2023-01-12', 'Rua X', 'Bairro Y', 'Cidade Z', 'País W', 'Complemento', '123', '00000-000', 'DESCARTADO');
 
-INSERT INTO notificacao(id, id_usuario, numero_ativo, usuario, data_expiracao, dias)
+INSERT INTO notificacao(id, id_usuario, numero_ativo, usuario, data_expiracao)
 VALUES
-(1, 98, 'A124','admteste', '2024-07-07', null),
-(2, 98, 'A125','admteste', '2024-07-08', null),
-(3, 99, 'A126','Desteste', '2024-07-10', null),
-(4, 99, 'A127','Desteste', '2024-07-20', null),
-(5, 98, 'A128','admteste', '2024-07-25', null);
+(1, 98, 'A124','admteste', '2024-07-07'),
+(2, 98, 'A125','admteste', '2024-07-08'),
+(3, 99, 'A126','Desteste', '2024-07-10'),
+(4, 99, 'A127','Desteste', '2024-07-20'),
+(5, 98, 'A128','admteste', '2024-07-25');
 
 SELECT * FROM usuario;
 SELECT * FROM ativos;
