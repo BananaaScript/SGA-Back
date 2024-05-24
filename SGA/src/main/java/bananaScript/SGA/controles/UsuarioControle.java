@@ -59,19 +59,20 @@ public class UsuarioControle {
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-    @Transactional
-    @DeleteMapping("/deletar/{id}")
-    public void deletarUsuario(@PathVariable Long id) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String nomeUsusario = authentication.getName();
-		Usuario usuario = repositorio.findByNome(nomeUsusario);
-		
-		if (usuario != null && usuario.getId().equals(id)) {
-	        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Você não pode deletar o seu próprio usuário.");
+	@Transactional
+	@DeleteMapping("/deletar/{id}")
+	public void deletarUsuario(@PathVariable Long id) {
+	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    String nomeUsuarioLogado = authentication.getName();
+	    Usuario usuarioLogado = repositorio.findByNome(nomeUsuarioLogado);
+	    
+	    if (usuarioLogado.getId().equals(id)) {
+	        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Você não pode deletar um usuário logado ou um usuário relacionado a outros registros");
 	    } else {
 	        repositorio.deleteById(id);
 	    }
-    }
+	}
+
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/informacoes")
