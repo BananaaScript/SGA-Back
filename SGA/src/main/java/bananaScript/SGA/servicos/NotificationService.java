@@ -78,6 +78,7 @@ public class NotificationService {
 		}
 	}
 	
+	@Scheduled(cron = "0 * * * * *")
 	public void atualizarDias() {
 		List<Notificacao> notis = notiRepo.findAll();
 		for(Notificacao noti : notis) {
@@ -102,7 +103,7 @@ public class NotificationService {
 		}
 	}
 	
-	
+	@Scheduled(cron = "0 * * * * *")
 	public List<Ativos> getAtivosExpirados(){
 		List<Ativos> ativosExpirados = new ArrayList<>();
 		List<Ativos> todosAtivos = ativosRepo.findAll();
