@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,9 +35,16 @@ public class UsuarioControle {
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PostMapping("/cadastrar")
-    public void cadastrarAtivos(@RequestBody Usuario usuario) {
-        repositorio.save(usuario);
-    }
+    public ResponseEntity<?> cadastrarAtivos(@RequestBody Usuario usuario) {
+		try {
+			repositorio.save(usuario);
+			return ResponseEntity.status(HttpStatus.CREATED).body("Usuário criado com sucesso");
+		} catch (DataIntegrityViolationException e){
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("CPF já está cadastrado");
+		}
+	}
+
+    
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/listar")

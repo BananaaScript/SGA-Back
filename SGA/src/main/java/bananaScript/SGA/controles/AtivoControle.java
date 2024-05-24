@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -47,10 +50,16 @@ public class AtivoControle {
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PostMapping("/cadastrar")
-    public void cadastrarAtivos(@RequestBody Ativos ativo) {
-		notifica.salvarNotificacao(ativo);
-        repositorio.save(ativo);
-    }
+    public ResponseEntity<?> cadastrarAtivos(@RequestBody Ativos ativo) {
+		try {
+			notifica.salvarNotificacao(ativo);
+			repositorio.save(ativo);
+			
+			return ResponseEntity.status(HttpStatus.CREATED).body("Ativo cadastrado com sucesso!");
+		} catch (DataIntegrityViolationException e){
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Número do ativo já está cadastrado");
+		}
+	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/listar")
