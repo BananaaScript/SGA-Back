@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS categoria(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(50),
     descricao VARCHAR(255),
-    complemento VARCHAR(255)
+    complemento VARCHAR(255) DEFAULT 'Não informado'
 );
 
 INSERT INTO categoria(id, nome, descricao, complemento)
@@ -50,8 +50,8 @@ CREATE TABLE IF NOT EXISTS modelo(
     nome_categoria VARCHAR(50),
     nome VARCHAR(50),
     descricao VARCHAR(255),
-    modelo VARCHAR(50),
-    fabricante VARCHAR(50),
+    modelo VARCHAR(50) DEFAULT 'Não informado',
+    fabricante VARCHAR(50) DEFAULT 'Não informado',
     FOREIGN KEY (id_categoria) REFERENCES categoria(id)
 );
 
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS ativos(
     nome_categoria VARCHAR(50),
     nome VARCHAR(50),
     descricao VARCHAR(255) DEFAULT 'Não informado',
-    complemento_ativo VARCHAR(255),
+    complemento_ativo VARCHAR(255) DEFAULT 'Não informado',
     responsavel VARCHAR(50),
     valor VARCHAR(50),
     num_ativo VARCHAR(50),
