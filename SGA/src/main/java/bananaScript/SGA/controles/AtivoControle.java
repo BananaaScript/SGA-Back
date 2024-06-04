@@ -3,7 +3,9 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -183,54 +185,59 @@ public class AtivoControle {
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@GetMapping("/valorativosateseismesesatras")
-	public Double obterValorAtivosAteSeisMesesAtras() {
-	    LocalDate dataAtual = LocalDate.now();
-	    LocalDate dataSeisMesesAtras = dataAtual.minusMonths(6);
-	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	@GetMapping("/valorativosantigo")
+	public Map<String, Double> obterValoresAtivos() {
+        LocalDate dataAtual = LocalDate.now();
+        LocalDate dataTresMesesAtras = dataAtual.minusMonths(3);
+        LocalDate dataSeisMesesAtras = dataAtual.minusMonths(6);
+        LocalDate dataDozeMesesAtras = dataAtual.minusMonths(12);
+        LocalDate dataVinteQuatroMesesAtras = dataAtual.minusMonths(24);
+        LocalDate dataSessentaMesesAtras = dataAtual.minusMonths(60);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-	    List<Ativos> ativos = repositorio.findAll();
+        List<Ativos> ativos = repositorio.findAll();
 
-	    double soma = 0.0;
-	    for (Ativos ativo : ativos) {
-	        if (ativo.getDataTransacao() != null) {
-	           
-	                LocalDate dataTransacao = LocalDate.parse(ativo.getDataTransacao(), formatter);
-	                if (dataTransacao.isBefore(dataSeisMesesAtras)) {
-	                    if (ativo.getValor() != null && !ativo.getValor().isEmpty()) {
-	                        soma += Double.parseDouble(ativo.getValor());
-	                    }
-	                }
-	            
-	        }
-	    }
-	    return soma;
-	}
-	
-	@CrossOrigin(origins = "*", allowedHeaders = "*")
-	@GetMapping("/valorativosatedozemesesatras")
-	public Double obterValorAtivosAteDozeMesesAtras() {
-	    LocalDate dataAtual = LocalDate.now();
-	    LocalDate dataDozeMesesAtras = dataAtual.minusMonths(12);
-	    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        double somaTresMeses = 0.0;
+        double somaSeisMeses = 0.0;
+        double somaDozeMeses = 0.0;
+        double somaVinteQuatroMeses = 0.0;
+        double somaSessentaMeses = 0.0;
 
-	    List<Ativos> ativos = repositorio.findAll();
+        for (Ativos ativo : ativos) {
+            if (ativo.getDataTransacao() != null) {
+                LocalDate dataTransacao = LocalDate.parse(ativo.getDataTransacao(), formatter);
 
-	    double soma = 0.0;
-	    for (Ativos ativo : ativos) {
-	        if (ativo.getDataTransacao() != null) {
-	           
-	                LocalDate dataTransacao = LocalDate.parse(ativo.getDataTransacao(), formatter);
-	                if (dataTransacao.isBefore(dataDozeMesesAtras)) {
-	                    if (ativo.getValor() != null && !ativo.getValor().isEmpty()) {
-	                        soma += Double.parseDouble(ativo.getValor());
-	                    }
-	                }
-	            
-	        }
-	    }
-	    return soma;
-	}
+                if (ativo.getValor() != null && !ativo.getValor().isEmpty()) {
+                    double valor = Double.parseDouble(ativo.getValor());
+
+                    if (dataTransacao.isBefore(dataTresMesesAtras)) {
+                        somaTresMeses += valor;
+                    }
+                    if (dataTransacao.isBefore(dataSeisMesesAtras)) {
+                        somaSeisMeses += valor;
+                    }
+                    if (dataTransacao.isBefore(dataDozeMesesAtras)) {
+                        somaDozeMeses += valor;
+                    }
+                    if (dataTransacao.isBefore(dataVinteQuatroMesesAtras)) {
+                        somaVinteQuatroMeses += valor;
+                    }
+                    if (dataTransacao.isBefore(dataSessentaMesesAtras)) {
+                        somaSessentaMeses += valor;
+                    }
+                }
+            }
+        }
+
+        Map<String, Double> resultado = new HashMap<>();
+        resultado.put("valorAtivosAteTresMesesAtras", somaTresMeses);
+        resultado.put("valorAtivosAteSeisMesesAtras", somaSeisMeses);
+        resultado.put("valorAtivosAteDozeMesesAtras", somaDozeMeses);
+        resultado.put("valorAtivosAteVinteQuatroMesesAtras", somaVinteQuatroMeses);
+        resultado.put("valorAtivosAteSessentaMesesAtras", somaSessentaMeses);
+
+        return resultado;
+    }
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@GetMapping("/quantidadeativosseismesesatras")
