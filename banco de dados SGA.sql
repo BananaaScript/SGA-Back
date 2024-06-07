@@ -107,6 +107,17 @@ CREATE TABLE IF NOT EXISTS manutencao(
     FOREIGN KEY (id_ativo) REFERENCES ativos(id)
 );
 
+CREATE TABLE IF NOT EXISTS nota_fiscal(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    id_Ativo INT,
+	empresa varchar(50),
+    razao_social varchar(50),
+    cnpj varchar(20),
+    descricao varchar(100),
+    nota_fiscal LONGBLOB
+);
+
+
 INSERT INTO ativos (id_modelo, id_categoria, id_responsavel, nome_modelo, nome_categoria, nome, responsavel, valor, num_ativo, data_manutencao, data_transacao, rua, bairro, cidade, pais, complemento, numero, cep, estado)
 VALUES 
 (2, 10, 98, 'Modelo 1', 'CategoriaTeste1', 'Ativo 1', 'admteste', '1000', 'A124', '2024-07-07', '2024-01-01', 'Rua X', 'Bairro Y', 'Cidade Z', 'País W', 'Complemento', '123', '00000-000', 'DISPONIVEL'),
