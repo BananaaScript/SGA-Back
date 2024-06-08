@@ -117,6 +117,14 @@ CREATE TABLE IF NOT EXISTS nota_fiscal(
     nota_fiscal LONGBLOB
 );
 
+CREATE TABLE IF NOT EXISTS historico_ativo(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome_ativo VARCHAR(50),
+    modelo VARCHAR(50),
+    numero_serie VARCHAR(50),
+    data_transacao DATE
+);
+
 
 INSERT INTO ativos (id_modelo, id_categoria, id_responsavel, nome_modelo, nome_categoria, nome, responsavel, valor, num_ativo, data_manutencao, data_transacao, rua, bairro, cidade, pais, complemento, numero, cep, estado)
 VALUES 
@@ -139,3 +147,4 @@ SELECT * FROM ativos;
 SELECT * FROM notificacao;
 SELECT * FROM categoria;
 SELECT * FROM modelo;
+select * from historico_ativo;

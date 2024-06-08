@@ -27,9 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import bananaScript.SGA.DTO.AtivoNotificacao;
 import bananaScript.SGA.entidades.Ativos;
+import bananaScript.SGA.entidades.HistoricoAtivo;
 import bananaScript.SGA.entidades.Notificacao;
 import bananaScript.SGA.entidades.Usuario;
 import bananaScript.SGA.repositorios.AtivosRepositorio;
+import bananaScript.SGA.repositorios.HistoricoAtivoRepositorio;
 import bananaScript.SGA.repositorios.NotificacaoRepositorio;
 import bananaScript.SGA.repositorios.UsuarioRepositorio;
 import bananaScript.SGA.servicos.NotificationService;
@@ -40,6 +42,9 @@ public class AtivoControle {
 	
 	@Autowired
 	private AtivosRepositorio repositorio;
+	
+	@Autowired 
+	private HistoricoAtivoRepositorio repositorioHistoricoAtivo;
 	
 	@Autowired
 	private UsuarioRepositorio usuarioRepositorio;
@@ -57,6 +62,13 @@ public class AtivoControle {
 			notifica.salvarNotificacao(ativo);
 			repositorio.save(ativo);
 			
+			HistoricoAtivo historicoAtivo = new HistoricoAtivo();
+	        historicoAtivo.setNomeAtivo(ativo.getNome());
+	        historicoAtivo.setModelo(ativo.getNome_modelo());
+	        historicoAtivo.setNumeroSerie(ativo.getNumAtivo());
+	        historicoAtivo.setDataTransacao(LocalDate.now());
+	        repositorioHistoricoAtivo.save(historicoAtivo);
+	        
 			return ResponseEntity.status(HttpStatus.CREATED).body("Ativo cadastrado com sucesso!");
 		} catch (DataIntegrityViolationException e){
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Número do ativo já está cadastrado");
