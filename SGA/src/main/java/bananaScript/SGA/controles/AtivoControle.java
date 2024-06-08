@@ -82,6 +82,12 @@ public class AtivoControle {
 	}
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
+	@GetMapping("/listarHistorico")
+	public List<HistoricoAtivo> obterHistorico(){
+		return repositorioHistoricoAtivo.findAll();
+	}
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	@PutMapping("/atualizar/{id}")
 	public void atualizarAtivo (@PathVariable Long id, @RequestBody Ativos novoAtivo) {
 		Ativos ativo = repositorio.findById(id).orElse(null);
