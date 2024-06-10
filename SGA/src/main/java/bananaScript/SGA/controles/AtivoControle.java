@@ -206,20 +206,20 @@ public class AtivoControle {
 	@GetMapping("/valorativosantigo")
 	public Map<String, Double> obterValoresAtivos() {
         LocalDate dataAtual = LocalDate.now();
+        LocalDate dataUmMesAtras = dataAtual.minusMonths(1);
+        LocalDate dataDoisMesesAtras = dataAtual.minusMonths(2);
         LocalDate dataTresMesesAtras = dataAtual.minusMonths(3);
-        LocalDate dataSeisMesesAtras = dataAtual.minusMonths(6);
-        LocalDate dataDozeMesesAtras = dataAtual.minusMonths(12);
-        LocalDate dataVinteQuatroMesesAtras = dataAtual.minusMonths(24);
-        LocalDate dataSessentaMesesAtras = dataAtual.minusMonths(60);
+        LocalDate dataQuatroMesesAtras = dataAtual.minusMonths(4);
+        LocalDate dataCincoMesesAtras = dataAtual.minusMonths(5);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         List<Ativos> ativos = repositorio.findAll();
 
+        double somaUmMes = 0.0;
+        double somaDoisMeses = 0.0;
         double somaTresMeses = 0.0;
-        double somaSeisMeses = 0.0;
-        double somaDozeMeses = 0.0;
-        double somaVinteQuatroMeses = 0.0;
-        double somaSessentaMeses = 0.0;
+        double somaQuatroMeses = 0.0;
+        double somaCincoMeses = 0.0;
 
         for (Ativos ativo : ativos) {
             if (ativo.getDataTransacao() != null) {
@@ -228,31 +228,31 @@ public class AtivoControle {
                 if (ativo.getValor() != null && !ativo.getValor().isEmpty()) {
                     double valor = Double.parseDouble(ativo.getValor());
 
+                    if (dataTransacao.isBefore(dataUmMesAtras)) {
+                        somaUmMes += valor;
+                    }
+                    if (dataTransacao.isBefore(dataDoisMesesAtras)) {
+                        somaDoisMeses += valor;
+                    }
                     if (dataTransacao.isBefore(dataTresMesesAtras)) {
                         somaTresMeses += valor;
                     }
-                    if (dataTransacao.isBefore(dataSeisMesesAtras)) {
-                        somaSeisMeses += valor;
+                    if (dataTransacao.isBefore(dataQuatroMesesAtras)) {
+                        somaQuatroMeses += valor;
                     }
-                    if (dataTransacao.isBefore(dataDozeMesesAtras)) {
-                        somaDozeMeses += valor;
-                    }
-                    if (dataTransacao.isBefore(dataVinteQuatroMesesAtras)) {
-                        somaVinteQuatroMeses += valor;
-                    }
-                    if (dataTransacao.isBefore(dataSessentaMesesAtras)) {
-                        somaSessentaMeses += valor;
+                    if (dataTransacao.isBefore(dataCincoMesesAtras)) {
+                        somaCincoMeses += valor;
                     }
                 }
             }
         }
 
         Map<String, Double> resultado = new HashMap<>();
+        resultado.put("valorAtivosAteUmMesAtras", somaUmMes);
+        resultado.put("valorAtivosAteDoisMesesAtras", somaDoisMeses);
         resultado.put("valorAtivosAteTresMesesAtras", somaTresMeses);
-        resultado.put("valorAtivosAteSeisMesesAtras", somaSeisMeses);
-        resultado.put("valorAtivosAteDozeMesesAtras", somaDozeMeses);
-        resultado.put("valorAtivosAteVinteQuatroMesesAtras", somaVinteQuatroMeses);
-        resultado.put("valorAtivosAteSessentaMesesAtras", somaSessentaMeses);
+        resultado.put("valorAtivosAteQuatroMesesAtras", somaQuatroMeses);
+        resultado.put("valorAtivosAteCincoMesesAtras", somaCincoMeses);
 
         return resultado;
     }
