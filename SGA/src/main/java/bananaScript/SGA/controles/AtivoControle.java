@@ -109,8 +109,14 @@ public class AtivoControle {
 			ativo.setId_categoria(novoAtivo.getId_categoria());
 			ativo.setNome_categoria(novoAtivo.getNome_categoria());
 			ativo.setId_responsavel(novoAtivo.getId_responsavel());
-			ativo.setResponsavel(novoAtivo.getResponsavel());
+			ativo.setResponsavel(novoAtivo.getResponsavel());		
 			repositorio.save(ativo);
+			HistoricoAtivo historicoAtivo = new HistoricoAtivo();
+	        historicoAtivo.setNomeAtivo(novoAtivo.getNome());
+	        historicoAtivo.setModelo(novoAtivo.getNome_modelo());
+	        historicoAtivo.setNumeroSerie(novoAtivo.getNumAtivo());
+	        historicoAtivo.setDataTransacao(LocalDate.now());
+	        repositorioHistoricoAtivo.save(historicoAtivo);
 			notifica.atualizarNotificacao(ativo.getId());
 	}
 	
