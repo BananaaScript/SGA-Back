@@ -217,6 +217,13 @@ public class AtivoControle {
         LocalDate dataTresMesesAtras = dataAtual.minusMonths(3);
         LocalDate dataQuatroMesesAtras = dataAtual.minusMonths(4);
         LocalDate dataCincoMesesAtras = dataAtual.minusMonths(5);
+        LocalDate dataSeisMesesAtras = dataAtual.minusMonths(6);
+        LocalDate dataSeteMesesAtras = dataAtual.minusMonths(7);
+        LocalDate dataOitoMesesAtras = dataAtual.minusMonths(8);
+        LocalDate dataNoveMesesAtras = dataAtual.minusMonths(9);
+        LocalDate dataDezMesesAtras = dataAtual.minusMonths(10);
+        LocalDate dataOnzeMesesAtras = dataAtual.minusMonths(11);
+        LocalDate dataDozeMesesAtras = dataAtual.minusMonths(12);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         List<Ativos> ativos = repositorio.findAll();
@@ -226,6 +233,13 @@ public class AtivoControle {
         double somaTresMeses = 0.0;
         double somaQuatroMeses = 0.0;
         double somaCincoMeses = 0.0;
+        double somaSeisMeses = 0.0;
+        double somaSeteMeses = 0.0;
+        double somaOitoMeses = 0.0;
+        double somaNoveMeses = 0.0;
+        double somaDezMeses = 0.0;
+        double somaOnzeMeses = 0.0;
+        double somaDozeMeses = 0.0;
 
         for (Ativos ativo : ativos) {
             if (ativo.getDataTransacao() != null) {
@@ -249,6 +263,27 @@ public class AtivoControle {
                     if (dataTransacao.isBefore(dataCincoMesesAtras)) {
                         somaCincoMeses += valor;
                     }
+                    if (dataTransacao.isBefore(dataSeisMesesAtras)) {
+                        somaSeisMeses += valor;
+                    }
+                    if (dataTransacao.isBefore(dataSeteMesesAtras)) {
+                        somaSeteMeses += valor;
+                    }
+                    if (dataTransacao.isBefore(dataOitoMesesAtras)) {
+                        somaOitoMeses += valor;
+                    }
+                    if (dataTransacao.isBefore(dataNoveMesesAtras)) {
+                        somaNoveMeses += valor;
+                    }
+                    if (dataTransacao.isBefore(dataDezMesesAtras)) {
+                        somaDezMeses += valor;
+                    }
+                    if (dataTransacao.isBefore(dataOnzeMesesAtras)) {
+                        somaOnzeMeses += valor;
+                    }
+                    if (dataTransacao.isBefore(dataDozeMesesAtras)) {
+                        somaDozeMeses += valor;
+                    }
                 }
             }
         }
@@ -259,6 +294,13 @@ public class AtivoControle {
         resultado.put("valorAtivosAteTresMesesAtras", somaTresMeses);
         resultado.put("valorAtivosAteQuatroMesesAtras", somaQuatroMeses);
         resultado.put("valorAtivosAteCincoMesesAtras", somaCincoMeses);
+        resultado.put("valorAtivosAteSeisMesesAtras", somaSeisMeses);
+        resultado.put("valorAtivosAteSeteMesesAtras", somaSeteMeses);
+        resultado.put("valorAtivosAteOitoMesesAtras", somaOitoMeses);
+        resultado.put("valorAtivosAteNoveMesesAtras", somaNoveMeses);
+        resultado.put("valorAtivosAteDezMesesAtras", somaDezMeses);
+        resultado.put("valorAtivosAteOnzeMesesAtras", somaOnzeMeses);
+        resultado.put("valorAtivosAteDozeMesesAtras", somaDozeMeses);
 
         return resultado;
     }
